@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Moderation Queue - Oi! Lend Me Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#519dfb",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                        "surface-dark": "#16202c",
+                        "surface-hover": "#1e2a3b",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f1823;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3b4e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #519dfb;
+        }
+        .slide-over-enter {
+            transform: translateX(100%);
+        }
+        .slide-over-active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden h-screen flex flex-col">
+<!-- Global Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-surface-dark px-6 flex items-center justify-between shrink-0 z-20">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-lg">
+                O!
+            </div>
+<h1 class="text-lg font-semibold tracking-tight">Reports &amp; Moderation Queue</h1>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative hidden md:block w-64">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-round text-slate-400 text-lg">search</span>
+</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-background-dark border-none rounded-lg text-sm focus:ring-2 focus:ring-primary dark:text-slate-200 placeholder-slate-500" placeholder="Search report ID, user..." type="text"/>
+</div>
+<!-- Notifications -->
+<button class="relative text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<!-- User Profile -->
+<div class="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-6">
+<div class="text-right hidden sm:block">
+<div class="text-sm font-medium">Alex Moderator</div>
+<div class="text-xs text-slate-500">Senior Admin</div>
+</div>
+<img alt="Admin Profile" class="w-9 h-9 rounded-full ring-2 ring-slate-200 dark:ring-slate-700" data-alt="Admin user avatar showing a smiling person" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq5nYHoJpu7clv2lK3Ltybt1jlHLRMp48zihA7bBJtg25wJlPBBSwD-rjHx7c5hV19OKGJFgvcY0rkMBtdxsNsxp4GA6JZyDZYjZn5JQn3jRvMiLoWRbapb5Gpb8lnKtLBu7yJKO1BxixEvv6nLk4Fq5Z34hBhfZHSFnMzav3wV13SudIg331jiJ78pAexmVAllvo02SDqh2F3UsWVPUdQ25HrWgEehf8CY54qqOg6NGB2AcSjxIfzeqalbaqUQz-A7Bnjuxm2LJIZ"/>
+</div>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex flex-1 overflow-hidden relative">
+<!-- Sidebar Navigation (Collapsed/Mini) -->
+<nav class="w-16 hidden md:flex flex-col items-center py-6 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-surface-dark shrink-0 z-10">
+<div class="flex flex-col gap-6">
+<button class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-background-dark hover:text-primary transition-colors">
+<span class="material-icons-round">dashboard</span>
+</button>
+<button class="p-2 rounded-lg text-primary bg-primary/10 dark:bg-primary/20">
+<span class="material-icons-round">report_problem</span>
+</button>
+<button class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-background-dark hover:text-primary transition-colors">
+<span class="material-icons-round">people</span>
+</button>
+<button class="p-2 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-background-dark hover:text-primary transition-colors">
+<span class="material-icons-round">settings</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark relative">
+<!-- Filter Toolbar -->
+<div class="px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
+<div class="flex bg-white dark:bg-surface-dark p-1 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm w-max">
+<button class="px-4 py-1.5 rounded text-sm font-medium bg-primary text-white shadow-sm">
+                        All
+                    </button>
+<button class="px-4 py-1.5 rounded text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                        Pending
+                    </button>
+<button class="px-4 py-1.5 rounded text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                        Reviewed
+                    </button>
+<button class="px-4 py-1.5 rounded text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                        Action Taken
+                    </button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-500 uppercase tracking-wider font-semibold mr-2">Sort by:</span>
+<select class="bg-white dark:bg-surface-dark border-slate-200 dark:border-slate-700 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2">
+<option>Newest First</option>
+<option>Oldest First</option>
+<option>Severity: High to Low</option>
+</select>
+</div>
+</div>
+<!-- Table Container -->
+<div class="flex-1 overflow-auto px-6 pb-6">
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden min-w-[800px]">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-background-dark/50 border-b border-slate-200 dark:border-slate-700">
+<tr>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider w-16">Type</th>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider">Reported Entity</th>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider">Category</th>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider">Reporter</th>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider">Timestamp</th>
+<th class="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wider text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1: Active/Selected -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-surface-hover transition-colors cursor-pointer bg-primary/5 dark:bg-primary/5 border-l-4 border-l-primary">
+<td class="px-6 py-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons-round text-lg">chat_bubble</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-slate-700 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Red sneaker product image thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6arhB7iZbGbzOP-oqcvlzaESwkjhlRl7rZbEKCETJiGU53QAm7b6v-w14DdCDEt4xg3o9ifg2AViLKA2IroaRlqdjiCrE1ktVpi48xOAdzojCUG5SFVPY2MZ6D82Ed1Vda8fbWG-UwSNTZb_LTdrF0_7ZxDM34zrfSkrOMm9EsD6itlaJmke_BsrN7r_bCHsUzeqsuKd5ytk8zJYsWbg4o7tssnwYW1O-xI5b3Fel3it8QfJmuhXomV-9ghEmW81Uf_CDZkL2SLYW"/>
+</div>
+<div>
+<div class="font-medium text-slate-900 dark:text-white">Listing: Nike Air Max 90</div>
+<div class="text-xs text-slate-500">ID: #99281-XM</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center text-slate-700 dark:text-slate-300">
+                                        Harassment
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-[10px] text-white font-bold">JD</div>
+<span class="text-slate-600 dark:text-slate-300">JohnDoe_99</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-slate-500 text-xs">
+                                    Oct 24, 10:42 AM
+                                </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800">
+                                        Pending
+                                    </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-surface-hover transition-colors cursor-pointer border-l-4 border-l-transparent">
+<td class="px-6 py-4">
+<div class="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-icons-round text-lg">person</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile picture of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQUfo2L7qyYlbvDdfeqFbwCWsgzy2rLNf-azm5sL4YXBMUsyE_16qXLfjKXkNMyBBdPufkJ_LJ85YaJ9ZQ09UDwZZ_onGrdvYkY3vokKdjRjwogXh10GiEMJNOlS-gLyuSxlkqBYE0R8XgSnlmmC9JKuFGuDs-mNzzOFchHFle44sh51iojrHZEWoM9vl0P9pWrAzfSjG2t5qkxRAVgfnyVlk-TexN9aLJqTMxZE_OtNj_Zbw6wEYTSK3weShqFYkRul9yOKTGUufN"/>
+</div>
+<div>
+<div class="font-medium text-slate-900 dark:text-white">User: @CryptoKing</div>
+<div class="text-xs text-slate-500">ID: #USER-8821</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center text-slate-700 dark:text-slate-300">
+                                        Scam / Fraud
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center text-[10px] text-white font-bold">SA</div>
+<span class="text-slate-600 dark:text-slate-300">Sarah_Admin</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-slate-500 text-xs">
+                                    Oct 24, 09:15 AM
+                                </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 border border-red-200 dark:border-red-800">
+                                        High Priority
+                                    </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-surface-hover transition-colors cursor-pointer border-l-4 border-l-transparent opacity-60">
+<td class="px-6 py-4">
+<div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+<span class="material-icons-round text-lg">shopping_bag</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-slate-700 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Camera lens product image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUJLu2ZiTQL2jIKffqkla43Yj51gJ0_cjp-c9DYO-WSHemM7O4oVzpCpbXreGZpVxez_3hIUJr5F0yW2dvSzhVfNr1E5OZUymHlfMnvmLN_i13rNirjZaef26JYp5M3YJ7MNdNPTchYo2fqvNJZ4Lfc6EyMBZXDicMmkftRWwcyF0QH32YsC3EZzKaRczO6_OMT4PqSrkX95yXA6BHgA5XrPAjo501tV8VqYAiE_Q-kaiqdejzFLRgZztCO8LuEx61-jX0ZIgbbRdM"/>
+</div>
+<div>
+<div class="font-medium text-slate-900 dark:text-white">Listing: DSLR Lens</div>
+<div class="text-xs text-slate-500">ID: #ITEM-1123</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center text-slate-700 dark:text-slate-300">
+                                        Counterfeit
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-orange-500 flex items-center justify-center text-[10px] text-white font-bold">MK</div>
+<span class="text-slate-600 dark:text-slate-300">MikeK_22</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-slate-500 text-xs">
+                                    Oct 23, 04:30 PM
+                                </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 border border-green-200 dark:border-green-800">
+                                        Resolved
+                                    </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-surface-hover transition-colors cursor-pointer border-l-4 border-l-transparent">
+<td class="px-6 py-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons-round text-lg">chat_bubble</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-200 dark:bg-slate-700 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Kitchen mixer product image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTVUHqyiTb-UVmORchZfI5tsoNzT4cewY8AcP8Zc3nio6imx3icjZwcL46hEIzxNay_H1-rIsr_6DnP3yurUcAfxNtFltA69ykWirc79OlXT5VkHIruWdqw-LUuIi0CEtrbTggzmQr2b7wiJC4EiD126b7nqjGQtkU4gP1pJx8-mhrmyaKHpj96uIbfFzQFTDXCEotkZpwIaBPS0L789FMJ7-h6472GXwdzEnQK36n-IS9sRMhfXJW-gfv0mPkEcarVuqn5d3Ae7jJ"/>
+</div>
+<div>
+<div class="font-medium text-slate-900 dark:text-white">Listing: KitchenAid Mixer</div>
+<div class="text-xs text-slate-500">ID: #99332-ZZ</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center text-slate-700 dark:text-slate-300">
+                                        Spam
+                                    </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center text-[10px] text-white font-bold">RO</div>
+<span class="text-slate-600 dark:text-slate-300">Robot_Cop</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-slate-500 text-xs">
+                                    Oct 24, 11:12 AM
+                                </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800">
+                                        Pending
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Slide-over Detail Panel -->
+<!-- This is absolutely positioned to simulate the slide-over effect over the main content -->
+<aside class="absolute top-0 right-0 bottom-0 w-[480px] bg-white dark:bg-surface-dark border-l border-slate-200 dark:border-slate-800 shadow-2xl z-30 flex flex-col">
+<!-- Panel Header -->
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between bg-slate-50 dark:bg-background-dark">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-mono text-slate-500">ID: #99281-XM</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300">Pending Review</span>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">User Harassment Report</h2>
+<p class="text-sm text-slate-500 mt-1">Reason: Offensive language in chat during negotiation.</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-icons-round">close</span>
+</button>
+</div>
+<!-- Panel Content (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- Evidence Section -->
+<section>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Evidence Log</h3>
+<div class="bg-slate-100 dark:bg-background-dark rounded-lg p-4 border border-slate-200 dark:border-slate-800">
+<div class="space-y-4">
+<!-- Chat Bubble 1 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700 flex-shrink-0"></div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="text-sm font-bold dark:text-slate-200">Buyer (Reporter)</span>
+<span class="text-xs text-slate-500">10:38 AM</span>
+</div>
+<div class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                        Hi, is the price negotiable? I can offer $80.
+                                    </div>
+</div>
+</div>
+<!-- Chat Bubble 2 (Reported) -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/20 flex-shrink-0 border border-red-200 dark:border-red-800"></div>
+<div class="w-full">
+<div class="flex items-baseline justify-between w-full">
+<div class="flex items-baseline gap-2">
+<span class="text-sm font-bold text-red-600 dark:text-red-400">Seller (Reported)</span>
+<span class="text-xs text-slate-500">10:41 AM</span>
+</div>
+<span class="material-icons-round text-red-500 text-sm" title="Flagged Content">flag</span>
+</div>
+<div class="text-sm text-slate-800 dark:text-slate-200 mt-1 p-2 bg-red-50 dark:bg-red-900/10 rounded border border-red-100 dark:border-red-900/30">
+                                        Are you stupid? Don't waste my time with that trash offer. Get lost you idiot.
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reporter Details -->
+<section>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Reported By</h3>
+<div class="flex items-center gap-4 bg-white dark:bg-surface-hover p-4 rounded-lg border border-slate-200 dark:border-slate-700">
+<div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold">
+                            JD
+                        </div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="text-sm font-bold dark:text-white">JohnDoe_99</h4>
+<span class="text-xs bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">High Trust</span>
+</div>
+<div class="flex items-center gap-4 mt-1 text-xs text-slate-500">
+<span>Member since 2021</span>
+<span>•</span>
+<span>98% Positive Feedback</span>
+</div>
+</div>
+</div>
+</section>
+<!-- History Timeline -->
+<section>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Action History</h3>
+<div class="relative pl-4 border-l-2 border-slate-200 dark:border-slate-700 space-y-6">
+<!-- Timeline Item 1 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600 border-2 border-white dark:border-surface-dark"></div>
+<div class="text-xs text-slate-500 mb-0.5">Oct 24, 10:42 AM</div>
+<p class="text-sm text-slate-700 dark:text-slate-300">System auto-flagged message for keyword "idiot".</p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-primary border-2 border-white dark:border-surface-dark"></div>
+<div class="text-xs text-slate-500 mb-0.5">Oct 24, 10:45 AM</div>
+<p class="text-sm text-slate-700 dark:text-slate-300">Report created by user <a class="text-primary hover:underline" href="#">@JohnDoe_99</a>.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Panel Footer Actions (Read-Only Context) -->
+<div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-background-dark">
+<div class="mb-4 p-3 rounded bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 flex gap-3">
+<span class="material-icons-round text-primary text-sm mt-0.5">info</span>
+<p class="text-xs text-blue-800 dark:text-blue-200 leading-relaxed">
+                        You are in <strong>Read-Only Mode</strong>. Actions must be taken from the Supervisor Dashboard.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-3 opacity-50 pointer-events-none grayscale">
+<button class="w-full py-2.5 px-4 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-sm font-medium">
+                        Dismiss
+                    </button>
+<button class="w-full py-2.5 px-4 rounded-lg bg-red-600 text-white text-sm font-medium shadow-lg shadow-red-900/20">
+                        Sanction User
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Overlay backdrop for small screens only, normally hidden on desktop if slide-over is persistent -->
+<div class="absolute inset-0 bg-black/50 z-20 md:hidden pointer-events-none opacity-0"></div>
+</div>
+</body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Item Details - Nintendo Switch | Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(39, 47, 58, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-10 py-3 glass-panel sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-tight">Oi! Lend Me</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+<div class="text-[#9aa9bc] flex border-none bg-white/10 items-center justify-center pl-4 rounded-l-xl border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-primary border-none bg-white/10 focus:border-none h-full placeholder:text-[#9aa9bc] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal" placeholder="Search for items..."/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">My Borrows</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Messages</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Community</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-background-dark text-sm font-bold tracking-tight hover:brightness-110">
+<span>List Item</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-white/10 text-white hover:bg-white/20">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/50" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYLfF8Du51IrIr1FdG5tKrNommZPhk_iZQ5MVFGPiDV0upDQ6JoFSykRQWnfTJKfpxFBtcRhv7Hx8zQdIhjnTdQiCbMMxk9lQN62PXLcBoc_3jTSD3Q15Zr5n2jqSkBrOrBHgA0UagSLafEAEROmdc5W5BRMaowWe6y4ZjImZKnKFE01Ufytk7VPdDt1415soGRG_EHKMqc9InDbMhSjjiMLa_lS621tDnfZ-u9O-pJhTSFeqNxcWxD2iAsdhGQwIVIEcedL3e1wjE");'></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-10 py-8">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-6">
+<a class="text-[#9aa9bc] text-sm font-medium hover:text-white" href="#">Home</a>
+<span class="text-[#9aa9bc] text-sm font-medium">/</span>
+<a class="text-[#9aa9bc] text-sm font-medium hover:text-white" href="#">Gaming</a>
+<span class="text-[#9aa9bc] text-sm font-medium">/</span>
+<span class="text-white text-sm font-medium">Nintendo Switch</span>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Gallery -->
+<div class="col-span-7 flex flex-col gap-4">
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden glass-panel">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Large clear photo of a Nintendo Switch with neon controllers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAM5lD2fmAX6qj3hVU4NDRGXog4rW3ySXeyQy5Xm9dL1JyNrW0P2cng_mJWK4X2NDqe2ue6mwwZ1BenBk8LUD23sxowNP3ugPSywH5jZ1EBAsoKBHxvoug7fyUCtK77sINKrCXvpWG8oMTULq8y0Rjd5wV_Z4Fz1Us-su3ujSeykwriHd6oXMlfpzlPAgGgyoOb9Yekn-AlcrzDQ-wdakpkyDFTO3rv4aflz88zLJRI5BF1BQN7IhQXvzjOmzA_orvVcL_cIR8Wp0FL");'></div>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-xl border-2 border-primary cursor-pointer" data-alt="Nintendo Switch handheld mode" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDS7LiKbEz0iOWwoME1WaifTBkw5jw5DBNnnxhQ4OMGpJ-yHSmtmLwfBKixhGzbmPd3smzRwfNC8YJoAON0yS13fASRgyF2bmGN9Qn0VTgNLjkJ67MdBAPlZ793OSaakZQwoBD4n-cQhV5tQMOr9vUqMtvZLEz1U814GRj2MiQOt8Rq3dvTF-XhsFk43yHsJZG6gXpdoQ_MtUUT_tPn2A-WOtTIkTc2KEB4YDrxgNoNFC82kw5c9A0YNxKrOARGfOv4oM0OrteXjp1B");'></div>
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer" data-alt="Nintendo Switch in docking station" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAe9_XtCH9un9ZnaqG_zEUMmK-5NbDpV_5saYwdwqlefJPtfaJhTxwMXIRE-wS0E08K8TFCF5Ev1QW0_4iFI_vlkCpVPxDbYNQGkLDdiIHxtH95eVHQZouba2PH_3WjRWLCP2RYjFeDyZFlOmFzGljRVu5e-8jw_DF8uFUd5ea9d_EpMX2I2H5oa_izAFHyhljTKnkGiX6otvSF-doNPgT991ZATgmWPD72kJ0dNpfz73OmB3IG-nw_4LIIKzXhZWOXX3RRoKU3Hr6O");'></div>
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer" data-alt="Joy-con controllers detached" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnKPi7Je4BKPi_J0JlG4q-RS3UgCtUeapVonM566i0HnRb4NFXGy2_86oe5J--JTodLgNS1nHAscxl3Q7Mr10se0cNao8mTypzMW_VTmH6VQ8DcsFjdWT7tFJIb7uCr63jjACRe0Trmx85mgyzdT4tmlO4vTyLU4Ww1sMZwOMmkOsrEG_CgeAlqyQ643l9KdC5zBK1XdftXHQMpXcfMjgcDWzQRBoMJnXtSvgFcxN1xinYqH1p1XECcVR2wSEjzr6SVWTSqZx8ZX7J");'></div>
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer relative" data-alt="Gaming accessories" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcU1S0ofokwykt5bKnJKkckPY1hCCDCV2RF2XZw0hDguw_eaiEhY-fg2pWq8SgPTmtueY8AYjoqyJCjFoO_vBB-poKkpfspIO3b8JPPL9qxXfxCuBAdDWTY177sbYrUZj6IlKNo5e8f_k0_Kqba7Nz_k5-lsC7zLRc_4HKQTwdUNtxnrxp8wL0Gv3IpG2mcXn6a-059a3nrQ30gIVHGu_2c-ZxRrhBFSPhExwA6nqDG_a8FrZk-NaIPjPo6gL_NyBNcOMBI9er0fGY");'>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
+<span class="text-white font-bold text-lg">+2</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Details & Actions -->
+<div class="col-span-5 flex flex-col gap-6">
+<!-- Title & Price -->
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full uppercase tracking-wider">Available Now</span>
+<div class="flex gap-2 text-yellow-400">
+<span class="material-symbols-outlined fill-1">star</span>
+<span class="text-white font-bold">4.9</span>
+</div>
+</div>
+<h1 class="text-white text-3xl font-extrabold leading-tight mb-2">Nintendo Switch - Neon Blue/Red</h1>
+<p class="text-primary text-sm font-bold flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                        Oi! This one is hot, grab it before someone else does! 🚨
+                    </p>
+<div class="flex items-center justify-between py-4 border-y border-white/10 my-4">
+<div>
+<p class="text-[#9aa9bc] text-xs uppercase font-bold">Lending Period</p>
+<p class="text-white font-semibold">Up to 7 Days</p>
+</div>
+<div class="text-right">
+<p class="text-[#9aa9bc] text-xs uppercase font-bold">Deposit</p>
+<p class="text-white font-semibold">$50.00 (Refundable)</p>
+</div>
+</div>
+<button class="w-full bg-primary hover:brightness-110 text-background-dark font-extrabold text-lg py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined font-bold">handshake</span>
+                        Borrow This Item
+                    </button>
+<p class="text-center text-[#9aa9bc] text-xs mt-3">Free for verified campus students</p>
+</div>
+<!-- Owner Card -->
+<div class="glass-panel p-5 rounded-xl flex items-center gap-4">
+<div class="size-14 rounded-full bg-center bg-no-repeat bg-cover border-2 border-white/20" data-alt="Profile picture of Sarah Johnson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcGRCBm2618pwZJXnkce2XJpAq8qFRayWkyA47j8OyTPbOYnlMybTLEb3sMZWO0G-d0AohbEXAQgW6NdFpISN9c3CvB3nrSDLKeDkVAgNBjHAOOTBD35MzVSj_ly9uqHMzxfohydJccAs8gJBJQ0bIpbtWRBCCR-RPEcmP1RF-yqoswotBkussG3_Et6t_S72WByD7Q4ICzrm8vD53zN3OYy1yFTHjAADusp2PEDpC2Pn7NvIjgyoXoi9_sGLlSfp2p45ZtjG7aCgp");'></div>
+<div class="flex-1">
+<h3 class="text-white font-bold leading-none mb-1">Sarah Johnson</h3>
+<p class="text-[#9aa9bc] text-xs font-medium">Computer Science '24 • 12 Items Lent</p>
+</div>
+<button class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-white">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+<!-- Borrow History -->
+<div class="glass-panel p-6 rounded-xl flex-1">
+<h3 class="text-white font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+                        Borrow History
+                    </h3>
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-white/10">
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-[24px] rounded-full bg-background-dark border-2 border-primary flex items-center justify-center z-10">
+<div class="size-2 rounded-full bg-primary"></div>
+</div>
+<p class="text-white text-sm font-bold">Returned by Alex Chen</p>
+<p class="text-[#9aa9bc] text-xs">Yesterday • 4:30 PM</p>
+<div class="mt-2 text-xs italic text-[#9aa9bc]">"Worked perfectly, comes with Mario Kart!"</div>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-[24px] rounded-full bg-background-dark border-2 border-white/20 flex items-center justify-center z-10">
+<div class="size-2 rounded-full bg-white/20"></div>
+</div>
+<p class="text-white/80 text-sm font-semibold">Borrowed by Alex Chen</p>
+<p class="text-[#9aa9bc] text-xs">Oct 12 - Oct 15</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1.5 size-[24px] rounded-full bg-background-dark border-2 border-white/20 flex items-center justify-center z-10">
+<div class="size-2 rounded-full bg-white/20"></div>
+</div>
+<p class="text-white/80 text-sm font-semibold">Returned by Mike D.</p>
+<p class="text-[#9aa9bc] text-xs">Oct 5 • 10:15 AM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Description Section -->
+<div class="mt-12 grid grid-cols-12 gap-8">
+<div class="col-span-7 glass-panel p-8 rounded-xl">
+<h3 class="text-xl font-bold text-white mb-4">About this item</h3>
+<p class="text-[#9aa9bc] leading-relaxed mb-6">
+                    Looking for a fun weekend? My Nintendo Switch is up for grabs! This is the v2 model with improved battery life. 
+                    It's been well cared for and always used with a screen protector. I'll include the dock, HDMI cable, power adapter, 
+                    and the Joy-Con grip. 
+                </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-4 bg-white/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">sports_esports</span>
+<div>
+<p class="text-white text-sm font-bold">Condition</p>
+<p class="text-[#9aa9bc] text-xs">Excellent (Like New)</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<div>
+<p class="text-white text-sm font-bold">Pickup Location</p>
+<p class="text-[#9aa9bc] text-xs">North Campus Dorms</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-5 glass-panel p-8 rounded-xl bg-gradient-to-br from-primary/10 to-transparent">
+<h3 class="text-xl font-bold text-white mb-4">Lender's Note</h3>
+<blockquote class="text-white/80 italic border-l-4 border-primary pl-4 mb-4">
+                    "I love playing Smash Bros but I'm studying for midterms this week so it's better if it's not in my room! Please treat it like your own. I'm usually free for handoffs near the library."
+                </blockquote>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+<span class="text-[#9aa9bc] text-xs font-bold uppercase tracking-widest">Verified Student ID</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="py-12 mt-12 border-t border-white/10">
+<div class="max-w-[1280px] mx-auto px-10 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-white/60 font-bold">Oi! Lend Me © 2023</span>
+</div>
+<div class="flex gap-8 text-[#9aa9bc] text-sm">
+<a class="hover:text-white" href="#">Safety Rules</a>
+<a class="hover:text-white" href="#">Terms of Use</a>
+<a class="hover:text-white" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+</body></html>

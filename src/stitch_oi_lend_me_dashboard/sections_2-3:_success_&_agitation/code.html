@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me - You're In &amp; The Problem</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3d90f5",
+            "background-light": "#f5f7f8",
+            "background-dark": "#101822",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-x-hidden">
+<!-- Section 2: Success Message -->
+<section class="relative flex flex-col justify-center items-center py-20 px-4 sm:px-10 bg-background-light dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+<div class="layout-content-container flex flex-col max-w-[960px] w-full">
+<div class="flex flex-col gap-10">
+<!-- Header Group -->
+<div class="flex flex-col gap-6 text-center items-center">
+<div class="flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 text-green-500 mb-2">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white tracking-tight text-4xl md:text-5xl font-black leading-tight">
+                You’re In!
+                </h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg font-normal leading-normal max-w-[600px] mx-auto">
+                Welcome to the Oi! Lend Me community. You are now ready to start sharing and saving on campus.
+                </p>
+</div>
+</div>
+<!-- Success Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1b2127] p-6 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Instant access</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                Start borrowing and lending immediately with your new account.
+              </p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1b2127] p-6 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Verified profile</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                Your student status is confirmed for safety and trust within the network.
+              </p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1b2127] p-6 shadow-sm">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">card_giftcard</span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">Community perks</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                Unlock exclusive deals, campus event tickets, and local discounts.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: The Problem (Agitate) -->
+<section class="relative flex flex-col justify-center items-center py-24 px-4 sm:px-10 bg-slate-50 dark:bg-[#0b1016]">
+<div class="layout-content-container flex flex-col max-w-[960px] w-full gap-12">
+<!-- Headline -->
+<div class="flex flex-col items-center text-center gap-4">
+<div class="inline-flex items-center rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-red-500">
+                The Struggle is Real
+            </div>
+<h2 class="text-slate-900 dark:text-white tracking-tight text-3xl md:text-4xl font-bold leading-tight max-w-[720px]">
+                The Problem with Campus Living
+            </h2>
+<p class="text-slate-600 dark:text-slate-400 text-base max-w-[600px]">
+                College life is hard enough without the extra stress of managing stuff you barely use.
+            </p>
+</div>
+<!-- Problem Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-[#161c24] border border-slate-200 dark:border-slate-800 transition-all hover:border-red-500/50 hover:shadow-lg dark:hover:shadow-red-900/10">
+<div class="h-40 w-full overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&amp;fit=crop&amp;q=80&amp;w=600')] bg-cover bg-center opacity-60 mix-blend-overlay" data-alt="Stack of expensive textbooks and money"></div>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-3xl mb-1">attach_money</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col p-6">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-2">Buying is expensive</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        Textbooks, gear, and appliances drain your wallet. Why spend hundreds on things you'll use for one semester?
+                    </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-[#161c24] border border-slate-200 dark:border-slate-800 transition-all hover:border-red-500/50 hover:shadow-lg dark:hover:shadow-red-900/10">
+<div class="h-40 w-full overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1596265330376-745a33116a44?auto=format&amp;fit=crop&amp;q=80&amp;w=600')] bg-cover bg-center opacity-60 mix-blend-overlay" data-alt="Cluttered messy dorm room"></div>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-3xl mb-1">inventory_2</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col p-6">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-2">Storage is a nightmare</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        Dorm rooms are tiny; clutter makes them smaller. Finding space for a vacuum or a projector is nearly impossible.
+                    </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl bg-white dark:bg-[#161c24] border border-slate-200 dark:border-slate-800 transition-all hover:border-red-500/50 hover:shadow-lg dark:hover:shadow-red-900/10">
+<div class="h-40 w-full overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611288870280-4a39556b3c16?auto=format&amp;fit=crop&amp;q=80&amp;w=600')] bg-cover bg-center opacity-60 mix-blend-overlay" data-alt="Overflowing trash bin with plastic waste"></div>
+<div class="absolute bottom-4 left-4 z-20">
+<span class="material-symbols-outlined text-white text-3xl mb-1">delete_forever</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col p-6">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-2">Wasteful habits</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                        Buying things you only use once hurts the planet. Single-use culture creates unnecessary landfill waste.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Personal Transition -->
+<div class="mt-8 flex justify-center">
+<p class="text-slate-800 dark:text-slate-200 text-xl md:text-2xl font-medium leading-normal text-center bg-slate-200 dark:bg-slate-800 px-8 py-4 rounded-full">
+                But... <span class="text-primary font-bold">there is a better way to live.</span>
+</p>
+</div>
+</div>
+</section>
+</body></html>

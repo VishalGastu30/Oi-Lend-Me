@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Group Equipment Hub | Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(39, 47, 58, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass border-b border-white/10 px-6 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">Oi! Lend Me</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-white text-sm font-medium border-b-2 border-primary pb-1" href="#">My Loans</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Groups</a>
+<a class="text-white/70 hover:text-white text-sm font-medium transition-colors" href="#">Explore</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-xl">search</span>
+<input class="bg-white/5 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary w-64" placeholder="Search equipment..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-background-dark px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                    Create New
+                </button>
+<div class="size-10 rounded-full border-2 border-primary/20 bg-cover bg-center" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgDz5MHqato1zkklC0G-ajvSSFCbAvVpo8mUZb1IvBqI0B7kIH0O_7IVk7Eu1f0TcmOrrhP80l1_JMQB2B49Aax53Rnxl15O9hH8Gss05SdFIVuBRj6bh7DVHU_jquvvLJuihCjbfMqB0eARcM3AXKWliVjDLMr5wjL04I2gZLPmFIEoOhvm0M2al_p52f_ePY8ZEH_RPsWaGpqPZx2l1WkxiBKgfCMnkgie7cpG3-gFbi7Vo8HTh7y7YEwYkn0a9iP1qxka6cnpNx");'></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto flex gap-6 p-6">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 hidden lg:block">
+<div class="glass rounded-xl p-4 sticky top-24 flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2">
+<div class="size-12 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white" data-alt="Photography Club Logo Icon">
+<span class="material-symbols-outlined text-2xl">camera_alt</span>
+</div>
+<div>
+<h3 class="font-bold text-sm">Photography Club</h3>
+<p class="text-xs text-primary">Premium Group</p>
+</div>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+<span class="text-sm font-semibold">All Items</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/60 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+<span class="text-sm font-medium">Available</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/60 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">schedule</span>
+<span class="text-sm font-medium">Borrowed</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/60 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">handyman</span>
+<span class="text-sm font-medium">Maintenance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-white/60 hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-sm font-medium">Members</span>
+</a>
+</div>
+<div class="mt-4 pt-4 border-t border-white/10">
+<button class="w-full bg-white/5 hover:bg-white/10 text-white border border-white/10 px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">settings</span>
+                        Manage Group
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 space-y-6">
+<!-- Profile Header Section -->
+<section class="glass rounded-xl p-6 @container">
+<div class="flex flex-col @[600px]:flex-row justify-between items-start @[600px]:items-center gap-6">
+<div class="flex gap-6">
+<div class="size-32 rounded-xl bg-center bg-cover border-2 border-white/10" data-alt="Photography Club Banner" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUBMKjOhFanBnHXckzpTqamzNY4S39YMLGKODoJOjSFRIJ4wxxRWV81mLdclNxJRZuZhUIxHEM3PIED75_DVOvpfBAV44g_KNpiOSzuBnNpvCfT_--OTYgRwDIYwZtL4AzIG6G-IeL8SBAIiyx_8RMJhfKw_22Thi7nhWq0TZcKOio4AHtN5z3M-qNQmNX50pyu529KiRbj6QkmNMLqZsz71glHvapIQUlJSThGbsBo-qRJuvvHKn2dXnjEm701fkiRX2yloIB5ij3");'></div>
+<div class="flex flex-col justify-center">
+<h1 class="text-3xl font-black tracking-tight mb-1">Photography Club</h1>
+<div class="flex flex-wrap gap-4 text-white/60 text-sm">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">group</span> 24 Members</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">category</span> 15 Items</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">person</span> Admin: Sarah Jenkins</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3 w-full @[600px]:w-auto">
+<button class="flex-1 @[600px]:flex-none bg-white/5 hover:bg-white/10 border border-white/10 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-all">
+                            Group Settings
+                        </button>
+<button class="flex-1 @[600px]:flex-none bg-primary text-background-dark px-5 py-2.5 rounded-xl text-sm font-bold transition-all">
+                            Invite Members
+                        </button>
+</div>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<section class="border-b border-white/10 px-2">
+<div class="flex gap-8">
+<a class="pb-3 border-b-2 border-primary text-primary font-bold text-sm" href="#">Inventory List</a>
+<a class="pb-3 border-b-2 border-transparent text-white/50 hover:text-white font-bold text-sm transition-colors" href="#">Booking Calendar</a>
+<a class="pb-3 border-b-2 border-transparent text-white/50 hover:text-white font-bold text-sm transition-colors" href="#">Usage Analytics</a>
+</div>
+</section>
+<!-- Page Heading & Controls -->
+<section class="flex flex-wrap justify-between items-end gap-4">
+<div class="max-w-xl">
+<h2 class="text-2xl font-bold mb-1">Group Equipment Hub</h2>
+<p class="text-white/60 text-sm">Manage and book collective gear for Photography Club members. Real-time availability shown below.</p>
+</div>
+<div class="flex gap-3">
+<button class="glass p-2.5 rounded-xl text-white/70 hover:text-white transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="bg-white/10 hover:bg-white/15 text-white px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+                        Add Equipment
+                    </button>
+</div>
+</section>
+<!-- Item List with Calendar-like Availability -->
+<div class="grid gap-4">
+<!-- Item 1 -->
+<div class="glass rounded-xl p-5 group hover:bg-white/5 transition-all">
+<div class="flex flex-col xl:flex-row gap-6">
+<div class="flex gap-4 min-w-[300px]">
+<div class="size-20 rounded-lg bg-center bg-cover bg-white/10" data-alt="Sony A7R IV Camera" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClsk84o76YWFEmHLXoJX5gLIVxm409JjlmDRhyK7SGxtundmjGco9BTxLqvETanEk9qjKzH34jJIOQ9RBh7PzCaRbYr8DTX2EdUGPduSB5LKz_qM27RuOSNOcjotKXUQRjKGKobyX7UQefuGbwuNd37KjTZtIEYtVedgkky3MwvIILyfQMSRBXF6CR3ryIx3cZZ6qxlZuALR3kpo3ASlbLBfr74irH53uqZ8_kTndC1J2j1uPf0gS6AMxNJaT0nmhTMG8NeFGF4JYU");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-lg mb-1">Sony A7R IV Body</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-[10px] font-bold uppercase tracking-wider">Available</span>
+<span class="text-white/40 text-xs">ID: PC-001</span>
+</div>
+</div>
+</div>
+<!-- Mini Calendar Row -->
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center text-[10px] text-white/40 font-bold uppercase tracking-widest px-1">
+<span>Availability (Next 7 Days)</span>
+<div class="flex gap-3">
+<span class="flex items-center gap-1"><span class="size-2 rounded-full bg-primary"></span> Booked</span>
+<span class="flex items-center gap-1"><span class="size-2 rounded-full bg-white/10"></span> Free</span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 h-12">
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">MON</span>
+<span class="text-xs font-bold">12</span>
+</div>
+<div class="rounded-lg bg-primary text-background-dark flex flex-col items-center justify-center p-1">
+<span class="text-[9px] opacity-70">TUE</span>
+<span class="text-xs font-bold">13</span>
+</div>
+<div class="rounded-lg bg-primary text-background-dark flex flex-col items-center justify-center p-1">
+<span class="text-[9px] opacity-70">WED</span>
+<span class="text-xs font-bold">14</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">THU</span>
+<span class="text-xs font-bold">15</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">FRI</span>
+<span class="text-xs font-bold">16</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SAT</span>
+<span class="text-xs font-bold">17</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SUN</span>
+<span class="text-xs font-bold">18</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 xl:border-l border-white/10 xl:pl-6">
+<button class="px-6 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl text-sm font-bold transition-all">Reserve</button>
+<button class="p-2.5 rounded-xl hover:bg-white/10 text-white/50 transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass rounded-xl p-5 group hover:bg-white/5 transition-all opacity-80">
+<div class="flex flex-col xl:flex-row gap-6">
+<div class="flex gap-4 min-w-[300px]">
+<div class="size-20 rounded-lg bg-center bg-cover bg-white/10" data-alt="Canon Lens" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA60S145gYCBSm6VbUgb2yaOXjMqNVI1psVNZ5-jzajKwG3WdeVKg2o9hwv7a49d7oCrzhwzu4dFNEzzKPWF2tJYartFf-RVcIjsDkwuR2lt8Fu4PwLY7f52k6-1u_Np82REINJHieSX1VnyK6mxC6qbVkcByqrYzOUCagYKj_F4SHylDS78EFkk4Fc9sHIYqLcacF4sm8R66ONFGB6vICEpGaDVkTaBdzJbBlZOHuXtICBwmmNTgibtwNVZsXoflDzti2gParpZ52W");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-lg mb-1">Canon EF 70-200mm f/2.8</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-wider">On Loan</span>
+<span class="text-white/40 text-xs">ID: PC-004</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center text-[10px] text-white/40 font-bold uppercase tracking-widest px-1">
+<span>Availability (Next 7 Days)</span>
+</div>
+<div class="grid grid-cols-7 gap-1 h-12">
+<div class="rounded-lg bg-primary text-background-dark flex flex-col items-center justify-center p-1">
+<span class="text-[9px] opacity-70">MON</span>
+<span class="text-xs font-bold">12</span>
+</div>
+<div class="rounded-lg bg-primary text-background-dark flex flex-col items-center justify-center p-1">
+<span class="text-[9px] opacity-70">TUE</span>
+<span class="text-xs font-bold">13</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">WED</span>
+<span class="text-xs font-bold">14</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">THU</span>
+<span class="text-xs font-bold">15</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">FRI</span>
+<span class="text-xs font-bold">16</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SAT</span>
+<span class="text-xs font-bold">17</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SUN</span>
+<span class="text-xs font-bold">18</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 xl:border-l border-white/10 xl:pl-6">
+<button class="px-6 py-2.5 bg-white/5 text-white/40 cursor-not-allowed rounded-xl text-sm font-bold">Waitlist</button>
+<button class="p-2.5 rounded-xl hover:bg-white/10 text-white/50 transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass rounded-xl p-5 group hover:bg-white/5 transition-all">
+<div class="flex flex-col xl:flex-row gap-6">
+<div class="flex gap-4 min-w-[300px]">
+<div class="size-20 rounded-lg bg-center bg-cover bg-white/10" data-alt="DJI Ronin Gimbal" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3fp6eK34zcHvMHyd7LdHOvcuCg0ttGYpME7bqk9BP9F-EomN5IDgj-p8P_8YhK918eZWorkf80Kh_dlrJWrDO4YukxZsZu30Uz3sHmHz6b8J5DWAK-BeFcf_tqxhqadFwYy9XBsBt5OCtht17OsWoFgkmBMHFV7KERCNlTqykBt5y_apEfeIGDi3q19A0PsbhDzXTz7Cc1kR99MPot7Va304RnOfqIXSTdL3Yubo4gMrkH3TqgnIOtVW3xAjk2a3T18aN40oOJjsY");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-lg mb-1">DJI Ronin-S Gimbal</h4>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-[10px] font-bold uppercase tracking-wider">Available</span>
+<span class="text-white/40 text-xs">ID: PC-012</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center text-[10px] text-white/40 font-bold uppercase tracking-widest px-1">
+<span>Availability (Next 7 Days)</span>
+</div>
+<div class="grid grid-cols-7 gap-1 h-12">
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">MON</span>
+<span class="text-xs font-bold">12</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">TUE</span>
+<span class="text-xs font-bold">13</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">WED</span>
+<span class="text-xs font-bold">14</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">THU</span>
+<span class="text-xs font-bold">15</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">FRI</span>
+<span class="text-xs font-bold">16</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SAT</span>
+<span class="text-xs font-bold">17</span>
+</div>
+<div class="rounded-lg bg-white/5 border border-white/5 flex flex-col items-center justify-center p-1">
+<span class="text-[9px] text-white/40">SUN</span>
+<span class="text-xs font-bold">18</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 xl:border-l border-white/10 xl:pl-6">
+<button class="px-6 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl text-sm font-bold transition-all">Reserve</button>
+<button class="p-2.5 rounded-xl hover:bg-white/10 text-white/50 transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More Section -->
+<div class="flex justify-center py-6">
+<button class="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm font-bold">
+                    Load 12 more items
+                    <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer Mobile Nav (Overlay for small screens) -->
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 md:hidden glass px-6 py-3 rounded-full flex gap-8 items-center border border-white/20">
+<span class="material-symbols-outlined text-primary">home</span>
+<span class="material-symbols-outlined text-white/60">group</span>
+<span class="material-symbols-outlined text-white/60">handyman</span>
+<span class="material-symbols-outlined text-white/60">notifications</span>
+</div>
+</body></html>

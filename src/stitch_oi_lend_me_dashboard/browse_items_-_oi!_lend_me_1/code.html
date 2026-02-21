@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Items - Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0B0F1A",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer components {
+            .glass-card {
+                @apply bg-white/[0.03] backdrop-blur-[12px] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+            }
+            .glass-nav {
+                @apply bg-[#0B0F1A]/80 backdrop-blur-[16px] border-b border-white/[0.05];
+            }.status-badge {
+                @apply px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider border backdrop-blur-md;
+            }
+            .status-badge-available {
+                @apply bg-emerald-500/10 text-emerald-400 border-emerald-500/20;
+            }
+            .status-badge-borrowed {
+                @apply bg-amber-500/10 text-amber-400 border-amber-500/20;
+            }
+            .status-badge-urgent {
+                @apply bg-rose-500/10 text-rose-400 border-rose-500/20;
+            }
+            .status-badge-overdue {
+                @apply bg-red-600/20 text-red-400 border-red-500/30 shadow-[0_0_10px_rgba(220,38,38,0.2)];
+            }.filter-group-item {
+                @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-gray-400 hover:text-white hover:bg-white/5;
+            }
+            .filter-group-item.active {
+                @apply bg-primary text-white shadow-lg shadow-primary/20;
+            }
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white selection:bg-primary/30">
+<div class="relative flex min-h-screen flex-col">
+<header class="sticky top-0 z-50 glass-nav px-6 lg:px-20 py-4">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-3">
+<div class="size-9 bg-primary flex items-center justify-center rounded-lg shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-[24px]">handshake</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">Oi! Lend Me</h2>
+</div>
+<div class="hidden md:flex items-center bg-white/5 border border-white/10 rounded-xl px-4 py-2 w-80">
+<span class="material-symbols-outlined text-gray-400 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-white placeholder:text-gray-500 w-full" placeholder="Search for items, tools..."/>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-primary text-sm font-semibold" href="#">Browse</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">My Items</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Lend Item</a>
+<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="#">Activity</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-xl bg-white/5 text-gray-400 hover:text-white transition-colors border border-white/10">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary/20 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDff0c2lj9cLoBtiWOQoX82qdnHcqjaDqWTSRXCHphai2xI5dKC4I38fxuFpr24YPlmFjgQQM-o597aluBCiD4VrF7sFAqCVhAnXKg9wi6aABv1mCo7De_UDLh0cr8uQzH8EldfUMBdFB90xDoxcFLiyRjCKQ_UsXgZah379pR3vkCAYBu2u3_-CQrfX_aRTyVoLiJWTOL-iv0o49Q028rN6_lhnEAoiNTcNjoWKBmgrRh7rqMJN4loUzwELCoLtdk7zkMewP55uJFC");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex max-w-[1400px] mx-auto w-full px-6 lg:px-20 py-8 gap-10">
+<aside class="hidden lg:flex flex-col w-64 shrink-0 gap-8">
+<div class="flex flex-col gap-6">
+<div>
+<h3 class="text-white text-lg font-bold mb-1">Categories</h3>
+<p class="text-gray-500 text-sm">Explore items by type</p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="filter-group-item active">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-sm">All Items</span>
+</button>
+<button class="filter-group-item">
+<span class="material-symbols-outlined">memory</span>
+<span class="text-sm">Electronics</span>
+</button>
+<button class="filter-group-item">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="text-sm">Books</span>
+</button>
+<button class="filter-group-item">
+<span class="material-symbols-outlined">build</span>
+<span class="text-sm">Tools</span>
+</button>
+<button class="filter-group-item">
+<span class="material-symbols-outlined">flatware</span>
+<span class="text-sm">Kitchenware</span>
+</button>
+<button class="filter-group-item">
+<span class="material-symbols-outlined">sports_tennis</span>
+<span class="text-sm">Sports Gear</span>
+</button>
+</div>
+</div>
+<div class="p-5 glass-card rounded-2xl">
+<h4 class="text-sm font-bold text-white mb-2">Campus Trust Score</h4>
+<div class="flex items-center gap-2 mb-3">
+<span class="text-2xl font-bold text-primary">4.9</span>
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+</div>
+</div>
+<p class="text-xs text-gray-500 leading-relaxed">You've successfully returned 12 items. Keep it up!</p>
+</div>
+</aside>
+<section class="flex-1 flex flex-col gap-6">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold text-white tracking-tight">Available for Borrowing</h1>
+<p class="text-gray-400 mt-1">Discover what your fellow students are sharing today.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-400 mr-2">Sort by:</span>
+<button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-xl transition-all">
+<span class="text-sm font-medium">Recent</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="flex items-center gap-2 shrink-0 px-4 py-2 rounded-full glass-card border-primary/40 bg-primary/10 text-primary text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">location_on</span> Near Me
+                        </button>
+<button class="flex items-center gap-2 shrink-0 px-4 py-2 rounded-full glass-card hover:border-white/20 text-gray-300 text-sm transition-all">
+<span class="material-symbols-outlined text-sm">verified</span> Verified Owners
+                        </button>
+<button class="flex items-center gap-2 shrink-0 px-4 py-2 rounded-full glass-card hover:border-white/20 text-gray-300 text-sm transition-all">
+<span class="material-symbols-outlined text-sm">star</span> High Rated
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-available">Available</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClaiTlpPGrn9M7tX36mHgn0wZ1QOf60V7dlb6j-k_HiMv_HvXKgb9SPQQAGtD_hmCjQ0z3Lu9rGaEPQhyZLLxaWCp48QU-MVaV17FR3A3DSEznnNmLv6_V1vqhlMO04z3X94rQaP4-WJXid_PQH99o-1RrUhdERsgUTQjkR41d-661iAqdw3yvj0O3j8CarqKD7SOmOHXvU4sXWjtWNbYDdjKzgEoYDW1DdDQuraLl4rvgRKnI_NtCrbWe3RuqmL3eY-6b0PJOh8Hq");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Premium Headphones</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyjbjDn5VqARuwuUCKh5s6sT9nMnGEsl1wWg7MuqVC9hcdZJ_IaFzLkH6CtKSR20PCq-tDikiQYW-M2aREhNbUzq40f6Kiso7pkJrg1Oc0BXSU0OHPuJm7CWkQz1dRqdsO02wMMgrCRm4qosSfUpmCihAVJxykV3a4Aluu_GKqEgRo5x_oUw03mLGyNOTZXruJkAvtRvtAxWml90P76IVvxAKwKYf5bdKWwsSB6NvybNYWzxa4VdnYZjiKaN0EDoKJB7IEq2llaTwZ");'></div>
+<span class="text-xs text-gray-400 font-medium">Alex P.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Electronics</span>
+<span class="text-primary font-bold text-sm">Lend now</span>
+</div>
+</article>
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-borrowed">Borrowed</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4hd70DrS9U4XwjbRJI96ZdJ7hsooQ1dAEla9eV6XgA486fQ9EQ3D1ATw1nKobDejzD6bGeWj5BcM4xgdUbgdPN835ixK_uXdbWYt5EY75ApPzjeq-x_ZeBbV7AWtDbFnrCLn0PFHAFUQhKp9-9n14aZaPreQaw9y3aYNnWUasx0nLfODjQYqxir-8oW_abnBMWnQL8NG13FfI6yldp0isOxRdPtZbajzUhFnEJ-HCG3ouSaafXmk2Typf-azHwFY965QvaxRTkiBN");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Professional Camera</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlEL36zlNnJRnMjQVqMlhNOCnKJYLe1UXF0StcqyRkbFf7Utug7JHiL5QKS49dQbmLLr3xJti--YXekDuPJdBnWhEx6eUMQA_0gUSiI4aDGbDzRRGUEK6CJNEAS_Kne3jRQGPfncSCN5ChzlC_ys55s6VvkXXRIV5M7WGACkf8gsTizt9wGbcObACW-lZ4tZz8O-n2Yxy1k1JlXUL9yoD5wGD2OYGTufzpT6uRbRbQAsvjAddhXmEkvOGO0rINXDHaEM526mxMTRGA");'></div>
+<span class="text-xs text-gray-400 font-medium">Jordan S.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Photography</span>
+<span class="text-amber-400 font-bold text-xs italic">Due in 2d</span>
+</div>
+</article>
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-urgent">Urgent</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCI4PAcOHVoUqWhp69y9JKEoEP5C736WqMVr_U5Z-QAsoPGsIIxIUxLANZhzlH_xfwrmvilSwiZIgjXgWA0DzjhP-7yBQGPNIZAqlygklKpGcPEGnpDHn3cUCcGgQVuBV91xsfklsJaQ_yOM0um0eK5LntWUNxF29qpK-70dT4Frv14DXyTD4I14jQ7ARY28oAdJJJUNUatASbo88uw8HyNB3q7R1vDeeYZOuWf-AwSMy3o5oXQGYmLH5e3ysSoRg-IZxGkbbWOMAPd");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Power Drill Kit</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4GfXnea2UKb_HVo5WzOLm49irvnJMfYfC6fbuNKwi8xFTHS9KdC3ckCjcVJCPSiivk-pQ1IPWat-bCTLXuJP9c1Ks406J03R1r7CDgnID02cHu3-MzNltI2tyE8V-jSiUaYrFj5fVA9QNj7xAunkAL1ZU7tlAcuLHijuoUsDX2ioG-sd17iTGiXNfAaWZKWgVUryZ_mao0rTghvJPC8rpgPLlrnj_dTqtkT_3U7D-PkR7L3p1sOEFakBK-BC2BAlHg8mCrCKjJkZm");'></div>
+<span class="text-xs text-gray-400 font-medium">Casey W.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Tools</span>
+<span class="text-rose-400 font-bold text-sm">Grab it now</span>
+</div>
+</article>
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-red-500/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-overdue">Overdue</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARkk26BbSZN_mORGvnW6RL_bPf2VPb-7sOaYlZhWKvzqSvT9ZxHJdhq96MQTgP2yl6ulcTiEENSC0b-ZyxfJCDfZoDdfiYnRCCY8OF7IvdSxZ5opQTxHF4r-znjFdejFz0QASQmgYEE8dgM5Ogsiw2doeqAY4nFByJymuP7DTkVzQR1or_PISOacigljK46RxKs0B9Epy7_1iYWIZaJhD2KWmavBZijH4v4SLU7rCwtlGRdX9ea6rGk6X4augg5XSC-oosC0ShKVKf");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Gaming Console</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCs0VcjTaN90aYTe9UvANthvhvaQNDT7WNu78i5-MVZfnj9oVLigt9z59WRU5YDYdppS0yaopSttu9Fkak0870d2T7jwAR5RTirlerNotpAyAcScJhWOyOb7_Z7Zkb-3eUGCA3GoVBi9Cpd3jIlsfDWknFbmBT0h0XCQqUXMXux3d4x-qukBXo2tf7ZsI9sLPDf67CdgxFjwMC75e70kmaUGwmgEqddZCyy3LS_9t-Jct0ZT8gC-jyo85ZBoshMmYWp4-7Eah78B4Je");'></div>
+<span class="text-xs text-gray-400 font-medium">Taylor B.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Gaming</span>
+<span class="text-red-400 font-bold text-xs uppercase italic">Alert sent</span>
+</div>
+</article>
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-available">Available</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXsKXKhLBYJZl4YZojPh1fyD3JbRIzjxTZBviYpMlJ1LMptUHtWo489BEkjMA4q2rfxArM1kumNxTTFhP_pY66_FhWrItC_AyXKhLVJ5fpFhlRARsGUxh8Cf9N0d6QnnYBzR-s6L5IU83iUrllL3LREfb74IHup9_VVMKwXQ7K9C-1WNF3sGC0EvGwJJ1w4Ifft3EXWzDOeaDyySn53ohcfP4vrPxB_hp2RyJrSFbX8m2Q8ZTsSStuue0ztet8yenAHfHzcRC7Tvyk");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Adventure Tent</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7arBnqBIEnCOJ6CYRk2fFRmsQlUn-vYDRhuOULcMPPVcpbmnpIqpeDC5StNB5giHOA2rBNkWsMLgU7UUvr7SwEs8LT0RWzLqdtvfZLX5e0deDSXfEuGURMXmxTVtyjRXmqeUXUWK6ZZrbWQjtgmFBp7sDPjFswyipOphRduUM1yYN7gFneD9TWPr1Mc-4tQsqdhILqgo7gKkmtsyXfKW8K_HnK_4zaKFaoI6L86-je_R4BjBzZ_rmxWBgazaf5HDXbdhvAtKIrww4");'></div>
+<span class="text-xs text-gray-400 font-medium">Quinn M.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Outdoor</span>
+<span class="text-primary font-bold text-sm">Lend now</span>
+</div>
+</article>
+<article class="group glass-card rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 cursor-pointer">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4">
+<div class="absolute top-3 left-3 z-10">
+<span class="status-badge status-badge-borrowed">Borrowed</span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFSi9vRsLHstXrWVNj2zFTlCFD4m1DfNqPpYKjOv6rbrY-8q5xtcJvuuGdh6_MprLc4s2dIbXx6w5vREBGIy_ftyLZKIrSuEclq8A0PfwfJ9kMbbGP-p-sh0MgBkPpj7aPMcg0WAluggLyTjtj-VIBcY4AvA0sTU8TVta3U0safgoCd6y-37MlX8F30SS-WFdtZDKnM424s9pGBL-6k0wnVheeVhXw_rDXg90utDYNPsCGlxou65P9smhu65nmAbn7htI5lrqZMy6a");'></div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Smart Blender</h3>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-5 rounded-full bg-cover bg-center border border-white/10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAztughOykNh_10m0g_X4THFBUbprDxMHab2VJkrY2RGRBorQQRoctl6DuTiXyKH_Ufcbo3lIeKCY0ijRjWDWFIkeDbH4uNGkR0KzGE-Hj8Tc58Mzjr50dDDVYwECL6WZmEF9k3Kj0qDQjDBLQ2zxIQRNj17GKLonCcP3XuoTV5IkI-AEIkFsHIID1BmpJKh6NZEi2bvUDc45HRhR5JaEFyCpxxM7IPivV4DDxYt7ERMpE6yVxArAhKjb7E_thWk7zRM0AgDeg4FVfT");'></div>
+<span class="text-xs text-gray-400 font-medium">Morgan R.</span>
+</div>
+</div>
+<button class="size-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/5">
+<span class="text-[10px] text-gray-500 uppercase tracking-[0.15em] font-bold">Kitchen</span>
+<span class="text-gray-500 font-bold text-xs italic">Back in 1w</span>
+</div>
+</article>
+</div>
+<div class="flex justify-center mt-8 gap-2">
+<button class="size-10 flex items-center justify-center rounded-xl glass-card text-gray-400 hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-xl bg-primary text-white font-bold">1</button>
+<button class="size-10 flex items-center justify-center rounded-xl glass-card text-gray-400 hover:text-white transition-all">2</button>
+<button class="size-10 flex items-center justify-center rounded-xl glass-card text-gray-400 hover:text-white transition-all">3</button>
+<button class="size-10 flex items-center justify-center rounded-xl glass-card text-gray-400 hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<footer class="mt-12 glass-nav py-12 px-6 lg:px-20 text-center">
+<div class="max-w-2xl mx-auto flex flex-col items-center gap-4">
+<div class="size-12 bg-primary/20 rounded-2xl flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+</div>
+<h3 class="text-2xl font-bold">Have items lying around?</h3>
+<p class="text-gray-400">Join 5,000+ students sharing tools, tech, and gear. Build your trust score and help your community.</p>
+<button class="mt-4 px-8 py-3 bg-primary hover:bg-primary/80 text-white font-bold rounded-xl transition-all shadow-xl shadow-primary/20">
+                    List an Item Now
+                </button>
+</div>
+</footer>
+</div>
+
+</body></html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me - Admin Dashboard Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                        "surface-dark": "#16202e",
+                        "surface-border": "#1f2d40",
+                        "text-secondary": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-white antialiased selection:bg-primary/30 h-screen overflow-hidden flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-surface-dark border-r border-slate-200 dark:border-surface-border flex-shrink-0 flex flex-col transition-all duration-300">
+<!-- Logo Area -->
+<div class="h-20 flex items-center px-6 border-b border-slate-200 dark:border-surface-border">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-xl">O</div>
+<span class="font-bold text-lg tracking-tight">Oi! Lend Me</span>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+<!-- Active Link -->
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-primary text-white shadow-lg shadow-primary/20" href="#">
+<span class="material-icons-round mr-3 text-xl">dashboard</span>
+                Overview
+            </a>
+<!-- Inactive Links -->
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 dark:text-text-secondary hover:bg-slate-50 dark:hover:bg-primary/10 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round mr-3 text-xl opacity-70 group-hover:opacity-100">flag</span>
+                Reports
+            </a>
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 dark:text-text-secondary hover:bg-slate-50 dark:hover:bg-primary/10 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round mr-3 text-xl opacity-70 group-hover:opacity-100">feedback</span>
+                Feedback
+            </a>
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 dark:text-text-secondary hover:bg-slate-50 dark:hover:bg-primary/10 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round mr-3 text-xl opacity-70 group-hover:opacity-100">gavel</span>
+                Moderation
+            </a>
+<div class="pt-6 pb-2 px-3">
+<p class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">System</p>
+</div>
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 dark:text-text-secondary hover:bg-slate-50 dark:hover:bg-primary/10 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round mr-3 text-xl opacity-70 group-hover:opacity-100">settings</span>
+                Settings
+            </a>
+<a class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 dark:text-text-secondary hover:bg-slate-50 dark:hover:bg-primary/10 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round mr-3 text-xl opacity-70 group-hover:opacity-100">admin_panel_settings</span>
+                Admin Roles
+            </a>
+</nav>
+<!-- User Profile Stub -->
+<div class="p-4 border-t border-slate-200 dark:border-surface-border">
+<div class="flex items-center gap-3">
+<div class="relative w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden flex-shrink-0">
+<img alt="Admin user avatar" class="object-cover w-full h-full" data-alt="Close up portrait of a man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBIB5DhD6ocZa4dB6f9aDTMHqyDl6rObv5VYjHXPkVinvogXIz9wvzGOFoSqruQn-Fbw9iKeTiyv00hWKQl4b8Hy2vXF8DE9dGJrb6kFL17DdMyvu_H4QgFpUNY0dEw7U4DkZBhGfD9-BWFlYHfy3ib8umN213fzcqbrAcOxv-nUv67riUG2CnrKHG4xRxAFLQofWKpusITiMsZtAi19IfCvuaLWpUpkdMsblJsjZ0whzY-kiBdB14MR7qCGLUqWubokJUeFAiFBED"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">
+                        Tom Cook
+                    </p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">
+                        Super Admin
+                    </p>
+</div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-icons-round text-lg">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="h-20 flex items-center justify-between px-8 bg-background-light dark:bg-background-dark sticky top-0 z-10 backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90">
+<div>
+<h1 class="text-2xl font-bold text-slate-800 dark:text-white">Overview</h1>
+<p class="text-sm text-slate-500 dark:text-text-secondary mt-0.5">Welcome back, here's what's happening today.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute top-2.5 left-3 text-slate-400">
+<span class="material-icons-round text-lg">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 text-slate-600 dark:text-white placeholder-slate-400" placeholder="Search..." type="text"/>
+</div>
+<button class="relative p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+</div>
+</header>
+<div class="px-8 pb-12">
+<!-- Stat Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Card 1: Total Users -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-6 border border-slate-200 dark:border-surface-border shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start z-10">
+<div>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-text-secondary mb-1">Total Users</p>
+<h3 class="text-3xl font-bold text-slate-800 dark:text-white">12,405</h3>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">group</span>
+</div>
+</div>
+<div class="mt-auto flex items-center gap-2 z-10">
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+<span class="material-icons-round text-[14px]">arrow_upward</span> 12%
+                        </span>
+<span class="text-xs text-slate-400">vs last month</span>
+</div>
+</div>
+<!-- Card 2: Total Items -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-6 border border-slate-200 dark:border-surface-border shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start z-10">
+<div>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-text-secondary mb-1">Total Items</p>
+<h3 class="text-3xl font-bold text-slate-800 dark:text-white">8,392</h3>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">inventory_2</span>
+</div>
+</div>
+<div class="mt-auto flex items-center gap-2 z-10">
+<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+<span class="material-icons-round text-[14px]">arrow_upward</span> 5%
+                        </span>
+<span class="text-xs text-slate-400">vs last month</span>
+</div>
+</div>
+<!-- Card 3: Active Requests -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-6 border border-slate-200 dark:border-surface-border shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start z-10">
+<div>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-text-secondary mb-1">Active Requests</p>
+<h3 class="text-3xl font-bold text-slate-800 dark:text-white">432</h3>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">sync_alt</span>
+</div>
+</div>
+<div class="mt-auto flex items-center gap-2 z-10">
+<span class="text-xs font-medium text-slate-400">
+                            Currently open exchanges
+                        </span>
+</div>
+</div>
+<!-- Card 4: Reports Pending (Critical) -->
+<div class="bg-white dark:bg-surface-dark rounded-xl p-6 border border-slate-200 dark:border-surface-border shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group ring-1 ring-primary/20">
+<div class="absolute right-0 top-0 w-24 h-24 bg-red-500/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start z-10">
+<div>
+<p class="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-text-secondary mb-1">Reports Pending</p>
+<h3 class="text-3xl font-bold text-slate-800 dark:text-white">15</h3>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">gpp_maybe</span>
+</div>
+</div>
+<div class="mt-auto flex items-center gap-2 z-10">
+<span class="text-xs font-medium text-orange-400 bg-orange-500/10 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                            Needs Review
+                        </span>
+<span class="text-xs text-slate-400">Avg time: 2h</span>
+</div>
+</div>
+</div>
+<!-- Activity Snapshot Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-semibold text-slate-800 dark:text-white">Activity Snapshot</h2>
+<a class="text-sm text-primary hover:text-primary/80 font-medium flex items-center" href="#">
+                        View all activity <span class="material-icons-round text-base ml-1">arrow_forward</span>
+</a>
+</div>
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-slate-50 dark:bg-surface-border/30 border-b border-slate-200 dark:border-surface-border text-slate-500 dark:text-text-secondary">
+<tr>
+<th class="px-6 py-4 font-medium w-48" scope="col">Timestamp</th>
+<th class="px-6 py-4 font-medium w-48" scope="col">Event Type</th>
+<th class="px-6 py-4 font-medium" scope="col">Description</th>
+<th class="px-6 py-4 font-medium text-right w-32" scope="col">Status</th>
+<th class="px-6 py-4 font-medium text-right w-24" scope="col">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-surface-border">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                                        10 mins ago
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="font-medium text-slate-700 dark:text-slate-200">New Item Listed</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300">
+<span class="font-medium text-slate-900 dark:text-white">Professional DSLR Camera</span> listed by User #9921
+                                    </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-500">
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round text-lg">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors bg-red-50/50 dark:bg-red-500/5">
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                                        25 mins ago
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-red-500"></div>
+<span class="font-medium text-slate-700 dark:text-slate-200">Report Filed</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300">
+                                        Inappropriate description flagged on <span class="font-medium text-slate-900 dark:text-white">Item #8822</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-500/10 dark:text-red-500">
+                                            Pending
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-white bg-primary/10 hover:bg-primary px-3 py-1 rounded text-xs font-medium transition-all">
+                                            Review
+                                        </button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                                        1 hour ago
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-medium text-slate-700 dark:text-slate-200">User Registration</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300">
+<span class="font-medium text-slate-900 dark:text-white">55 new users</span> joined since last check
+                                    </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-500/10 dark:text-blue-500">
+                                            Info
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round text-lg">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                                        2 hours ago
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-orange-400"></div>
+<span class="font-medium text-slate-700 dark:text-slate-200">System Alert</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300">
+                                        Database backup completed successfully
+                                    </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+                                            System
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round text-lg">info</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">
+                                        3 hours ago
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="font-medium text-slate-700 dark:text-slate-200">New Item Listed</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-300">
+<span class="font-medium text-slate-900 dark:text-white">Electric Drill Set</span> listed by User #1204
+                                    </td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-500">
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round text-lg">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-border/20 flex items-center justify-between">
+<span class="text-sm text-slate-500 dark:text-slate-400">Showing <span class="font-medium text-slate-900 dark:text-white">1</span> to <span class="font-medium text-slate-900 dark:text-white">5</span> of <span class="font-medium text-slate-900 dark:text-white">248</span> results</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm border border-slate-300 dark:border-surface-border rounded bg-white dark:bg-surface-dark text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-surface-border disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 text-sm border border-slate-300 dark:border-surface-border rounded bg-white dark:bg-surface-dark text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-surface-border">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick System Health Check (Optional extra for context) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-dark/50 border border-dashed border-slate-300 dark:border-surface-border rounded-lg p-4 flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<div class="text-sm text-slate-600 dark:text-slate-400">
+                        System Status: <span class="font-semibold text-emerald-600 dark:text-emerald-400">Healthy</span>
+</div>
+</div>
+<div class="bg-surface-dark/50 border border-dashed border-slate-300 dark:border-surface-border rounded-lg p-4 flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="text-sm text-slate-600 dark:text-slate-400">
+                        Last Backup: <span class="font-semibold text-slate-800 dark:text-white">2 hours ago</span>
+</div>
+</div>
+<div class="bg-surface-dark/50 border border-dashed border-slate-300 dark:border-surface-border rounded-lg p-4 flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-blue-400"></div>
+<div class="text-sm text-slate-600 dark:text-slate-400">
+                        Moderators Online: <span class="font-semibold text-slate-800 dark:text-white">4</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

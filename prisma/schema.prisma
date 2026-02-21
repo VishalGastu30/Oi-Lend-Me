@@ -1,0 +1,743 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Enums matching Frontend Types
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+enum ItemCategory {
+  Electronics
+  Books
+  Lab
+  Misc
+  Chargers
+  Class
+}
+
+enum ItemStatus {
+  AVAILABLE
+  BORROWED
+  REQUESTED
+  ARCHIVED
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  BORROWED
+  RETURNED
+  CANCELLED
+}
+
+enum GroupRole {
+  ADMIN
+  MEMBER
+}
+
+enum GroupCategory {
+  ACADEMIC
+  HOSTEL
+  CLUB
+  HOBBY
+  EVENT
+}
+
+enum GroupVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum GroupRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_EDIT
+}
+
+enum GroupMemberStatus {
+  ACTIVE
+  PENDING
+  BANNED
+}
+
+enum JoinRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ItemAvailabilityStatus {
+  AVAILABLE
+  ON_LOAN
+  MAINTENANCE
+}
+
+enum BookingStatus {
+  BOOKED
+  RETURNED
+  CANCELLED
+}
+
+enum ProofFileType {
+  APPROVAL_LETTER
+  POSTER
+  WEBSITE_SCREENSHOT
+  OTHER
+}
+
+enum NotificationType {
+  REQUEST
+  MESSAGE
+  SYSTEM
+  KARMA
+}
+
+enum RequirementUrgency {
+  NORMAL
+  URGENT
+}
+
+enum RequirementVisibility {
+  CAMPUS
+  GROUP
+}
+
+enum RequirementStatus {
+  OPEN
+  FULFILLED
+  CLOSED
+  EXPIRED
+}
+
+// ---------------------------------------------------------
+// MODELS
+// ---------------------------------------------------------
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  name         String
+  avatarUrl    String?  @map("avatar_url")
+  role         UserRole @default(STUDENT)
+  passwordHash String?  @map("password_hash")
+  phoneNumber  String?  @map("phone_number")
+  karmaScore   Int      @default(0) @map("karma_score")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  items            Item[]
+  requests         Request[]       @relation("Requester")
+  groupMemberships GroupMember[]
+  sentMessages     Message[]
+  reputationLogs   ReputationLog[]
+  notifications    Notification[]
+
+  // New Chat Relations
+  conversationsA Conversation[] @relation("UserA")
+  conversationsB Conversation[] @relation("UserB")
+
+  // Admin / Support Relations
+  filedReports      Report[]           @relation("Reporter")
+  submittedFeedback Feedback[]
+  moderationActions ModerationAction[] @relation("AdminActions")
+
+  // Block Relations
+  blocking  BlockedUser[] @relation("Blocker")
+  blockedBy BlockedUser[] @relation("Blocked")
+
+  // Requirement Relations
+  requirements         Requirement[]         @relation("RequesterRequirements")
+  requirementResponses RequirementResponse[] @relation("LenderResponses")
+
+  // Group Ownership
+  ownedGroups   Group[]        @relation("GroupOwner")
+  groupRequests GroupRequest[] @relation("GroupRequester")
+
+  // Moderation Relations
+  warns       UserWarn[]
+  suspensions UserSuspension[]
+  bans        UserBan[]
+
+  lastSeen    DateTime  @default(now()) @map("last_seen")
+  isOnline    Boolean   @default(false) @map("is_online")
+  about       String?
+  latitude    Float?
+  longitude   Float?
+  bannedUntil DateTime? @map("banned_until")
+
+  @@index([role])
+  @@index([karmaScore])
+  @@map("users")
+}
+
+enum GroupStatus {
+  ACTIVE
+  WARNED
+  TEMP_BANNED
+  PERMA_BANNED
+}
+
+model Group {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique
+  name        String
+  category    GroupCategory
+  description String?
+  imageUrl    String?       @map("image_url")
+
+  // Ownership & Verification
+  ownerUserId String          @map("owner_user_id") @db.Uuid
+  owner       User            @relation("GroupOwner", fields: [ownerUserId], references: [id], onDelete: Cascade)
+  isVerified  Boolean         @default(false) @map("is_verified")
+  visibility  GroupVisibility @default(PUBLIC)
+  status      GroupStatus     @default(ACTIVE)
+  bannedUntil DateTime?       @map("banned_until")
+
+  // Cached counts for performance
+  memberCount Int @default(0) @map("member_count")
+  itemCount   Int @default(0) @map("item_count")
+  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  members      GroupMember[]
+  items        Item[]
+  requirements Requirement[]
+  groupItems   GroupItem[]
+  joinRequests GroupJoinRequest[]
+  actionLogs   GroupActionLog[]
+
+  @@index([category])
+  @@index([isVerified])
+  @@index([ownerUserId])
+  @@index([status])
+  @@map("groups")
+}
+
+model GroupMember {
+  groupId  String            @map("group_id") @db.Uuid
+  userId   String            @map("user_id") @db.Uuid
+  role     GroupRole         @default(MEMBER)
+  status   GroupMemberStatus @default(PENDING)
+  joinedAt DateTime          @default(now()) @map("joined_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([groupId, userId])
+  @@index([status])
+  @@map("group_members")
+}
+
+model Item {
+  id          String       @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  category    ItemCategory
+  imageUrl    String?      @map("image_url")
+  status      ItemStatus   @default(AVAILABLE)
+
+  // Ownership (Exclusive OR enforced by DB constraints, here by logic)
+  ownerId String? @map("owner_id") @db.Uuid
+  groupId String? @map("group_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  owner User?  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  group Group? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  requests             Request[]
+  images               ItemImage[]
+  requirementResponses RequirementResponse[]
+
+  price     Decimal? @db.Decimal(10, 2)
+  latitude  Float?
+  longitude Float?
+
+  condition      String?  @map("condition") // NEW, LIKE_NEW, GOOD, FAIR, POOR
+  lenderNote     String?  @map("lender_note")
+  maxLendingDays Int?     @map("max_lending_days")
+  deposit        Decimal? @map("deposit") @db.Decimal(10, 2)
+
+  @@index([status])
+  @@index([category])
+  @@index([ownerId])
+  @@index([groupId])
+  @@index([price])
+  @@map("items")
+}
+
+model ItemImage {
+  id         String   @id @default(uuid()) @db.Uuid
+  itemId     String   @map("item_id") @db.Uuid
+  url        String
+  orderIndex Int      @map("order_index")
+  isPrimary  Boolean  @default(false) @map("is_primary")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+  @@index([itemId, orderIndex])
+  @@map("item_images")
+}
+
+model Request {
+  id          String        @id @default(uuid()) @db.Uuid
+  itemId      String        @map("item_id") @db.Uuid
+  requesterId String        @map("requester_id") @db.Uuid
+  status      RequestStatus @default(PENDING)
+
+  startDate  DateTime? @map("start_date")
+  endDate    DateTime? @map("end_date")
+  returnedAt DateTime? @map("returned_at")
+  updatedAt  DateTime  @default(now()) @updatedAt @map("updated_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  item      Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  requester User @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  conversationId String?         @map("conversation_id") @db.Uuid
+  conversation   Conversation?   @relation(fields: [conversationId], references: [id])
+  reputationLogs ReputationLog[]
+
+  // Requirement Response Link
+  requirementResponse RequirementResponse? @relation("RequirementBorrowRequest")
+
+  // Logic for "one active request per item" handled by unique partial index in DB
+  // Prisma doesn't fully support partial indexes in schema syntax yet without raw sql migration
+
+  @@index([status])
+  @@index([itemId])
+  @@index([requesterId])
+  @@map("requests")
+}
+
+enum ConversationStatus {
+  ACTIVE
+  LOCKED
+}
+
+model Conversation {
+  id String @id @default(uuid()) @db.Uuid
+  // Modification: Request ID is now optional or just a reference to the *latest* request?
+  // User wants "History of requests". The conversation is PER USER PAIR, not PER REQUEST.
+  // So we remove the unique constraint on requestId, or make it a 1-to-many?
+  // Let's link conversation to USERS directly.
+
+  userAId String             @map("user_a_id") @db.Uuid
+  userBId String             @map("user_b_id") @db.Uuid
+  status  ConversationStatus @default(ACTIVE)
+
+  lastMessageAt DateTime @default(now()) @map("last_message_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  // Relations
+  userA User @relation("UserA", fields: [userAId], references: [id], onDelete: Cascade)
+  userB User @relation("UserB", fields: [userBId], references: [id], onDelete: Cascade)
+
+  messages Message[]
+
+  // A conversation can be related to many requests over time
+  requests Request[]
+
+  @@unique([userAId, userBId]) // One chat per pair
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(uuid()) @db.Uuid
+  conversationId String   @map("conversation_id") @db.Uuid
+  senderId       String   @map("sender_id") @db.Uuid
+  content        String
+  isRead         Boolean  @default(false) @map("is_read")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model ReputationLog {
+  id               String   @id @default(uuid()) @db.Uuid
+  userId           String   @map("user_id") @db.Uuid
+  changeAmount     Int      @map("change_amount")
+  reason           String
+  relatedRequestId String?  @map("related_request_id") @db.Uuid
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request Request? @relation(fields: [relatedRequestId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@map("reputation_logs")
+}
+
+model Notification {
+  id           String           @id @default(uuid()) @db.Uuid
+  userId       String           @map("user_id") @db.Uuid
+  type         NotificationType @default(SYSTEM)
+  message      String
+  isRead       Boolean          @default(false) @map("is_read")
+  resourcePath String?          @map("resource_path")
+  createdAt    DateTime         @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}
+
+// ---------------------------------------------------------
+// ADMIN & MODERATION MODELS
+// ---------------------------------------------------------
+
+model Feedback {
+  id          String           @id @default(uuid()) @db.Uuid
+  userId      String?          @map("user_id") @db.Uuid
+  category    FeedbackCategory
+  message     String
+  status      FeedbackStatus   @default(NEW)
+  pageContext String?          @map("page_context")
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([category])
+  @@index([status])
+  @@map("feedback")
+}
+
+enum FeedbackCategory {
+  BUG
+  SUGGESTION
+  COMPLAINT
+  OTHER
+}
+
+enum FeedbackStatus {
+  NEW
+  REVIEWED
+  RESOLVED
+}
+
+model Report {
+  id         String       @id @default(uuid()) @db.Uuid
+  reporterId String?      @map("reporter_id") @db.Uuid
+  entityType EntityType   @map("entity_type")
+  entityId   String       @map("entity_id") @db.Uuid
+  reason     String
+  comment    String?
+  status     ReportStatus @default(PENDING)
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  reporter User? @relation("Reporter", fields: [reporterId], references: [id], onDelete: SetNull)
+
+  @@index([reporterId])
+  @@index([status])
+  @@index([entityType, entityId])
+  @@map("reports")
+}
+
+enum EntityType {
+  USER
+  ITEM
+  MESSAGE
+  GROUP
+  CHAT
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  ACTION_TAKEN
+  DISMISSED
+}
+
+model ModerationAction {
+  id         String     @id @default(uuid()) @db.Uuid
+  adminId    String     @map("admin_id") @db.Uuid
+  actionType ActionType @map("action_type")
+  targetType EntityType @map("target_type")
+  targetId   String     @map("target_id") @db.Uuid
+  notes      String?
+  createdAt  DateTime   @default(now()) @map("created_at")
+
+  admin User @relation("AdminActions", fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([targetId])
+  @@index([actionType])
+  @@map("moderation_actions")
+}
+
+enum ActionType {
+  WARN
+  BLOCK
+  BAN
+  REMOVE_ITEM
+  LOCK_CHAT
+}
+
+model BlockedUser {
+  blockerId String   @map("blocker_id") @db.Uuid
+  blockedId String   @map("blocked_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+
+  blocker User @relation("Blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked User @relation("Blocked", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@id([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
+  @@map("blocked_users")
+}
+
+// ---------------------------------------------------------
+// REQUIREMENT POSTING SYSTEM ("Ask the Campus")
+// ---------------------------------------------------------
+
+model Requirement {
+  id            String                @id @default(uuid()) @db.Uuid
+  title         String
+  description   String?
+  category      ItemCategory
+  durationStart DateTime              @map("duration_start")
+  durationEnd   DateTime              @map("duration_end")
+  urgency       RequirementUrgency    @default(NORMAL)
+  visibility    RequirementVisibility @default(CAMPUS)
+  status        RequirementStatus     @default(OPEN)
+
+  requesterId String @map("requester_id") @db.Uuid
+  requester   User   @relation("RequesterRequirements", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  groupId String? @map("group_id") @db.Uuid
+  group   Group?  @relation(fields: [groupId], references: [id], onDelete: SetNull)
+
+  responses RequirementResponse[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([requesterId])
+  @@index([status])
+  @@index([category])
+  @@index([visibility])
+  @@index([expiresAt])
+  @@map("requirements")
+}
+
+model RequirementResponse {
+  id String @id @default(uuid()) @db.Uuid
+
+  requirementId String      @map("requirement_id") @db.Uuid
+  requirement   Requirement @relation(fields: [requirementId], references: [id], onDelete: Cascade)
+
+  lenderId String @map("lender_id") @db.Uuid
+  lender   User   @relation("LenderResponses", fields: [lenderId], references: [id], onDelete: Cascade)
+
+  itemId String @map("item_id") @db.Uuid
+  item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  borrowRequestId String?  @unique @map("borrow_request_id") @db.Uuid
+  borrowRequest   Request? @relation("RequirementBorrowRequest", fields: [borrowRequestId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([requirementId])
+  @@index([lenderId])
+  @@map("requirement_responses")
+}
+
+// ---------------------------------------------------------
+// INSTITUTIONAL GROUPS SYSTEM
+// ---------------------------------------------------------
+
+model GroupRequest {
+  id               String             @id @default(uuid()) @db.Uuid
+  requesterId      String             @map("requester_id") @db.Uuid
+  groupName        String             @map("group_name")
+  category         GroupCategory
+  facultyEmail     String?            @map("faculty_email")
+  officialEmail    String?            @map("official_email")
+  shortDescription String?            @map("short_description")
+  status           GroupRequestStatus @default(PENDING)
+  reviewNotes      String?            @map("review_notes")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+
+  requester User         @relation("GroupRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  proofs    GroupProof[]
+
+  @@index([requesterId])
+  @@index([status])
+  @@map("group_requests")
+}
+
+model GroupProof {
+  id             String        @id @default(uuid()) @db.Uuid
+  groupRequestId String        @map("group_request_id") @db.Uuid
+  uploaderId     String        @map("uploader_id") @db.Uuid
+  fileUrl        String        @map("file_url")
+  fileType       ProofFileType @map("file_type")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  groupRequest GroupRequest @relation(fields: [groupRequestId], references: [id], onDelete: Cascade)
+
+  @@index([groupRequestId])
+  @@map("group_proofs")
+}
+
+model GroupJoinRequest {
+  id        String            @id @default(uuid()) @db.Uuid
+  groupId   String            @map("group_id") @db.Uuid
+  userId    String            @map("user_id") @db.Uuid
+  message   String?
+  status    JoinRequestStatus @default(PENDING)
+  createdAt DateTime          @default(now()) @map("created_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([userId])
+  @@index([status])
+  @@map("group_join_requests")
+}
+
+model GroupItem {
+  id                 String                 @id @default(uuid()) @db.Uuid
+  groupId            String                 @map("group_id") @db.Uuid
+  name               String
+  description        String?
+  category           ItemCategory
+  condition          String?
+  availabilityStatus ItemAvailabilityStatus @default(AVAILABLE) @map("availability_status")
+  imageUrls          String[]               @map("image_urls")
+  createdAt          DateTime               @default(now()) @map("created_at")
+  updatedAt          DateTime               @updatedAt @map("updated_at")
+
+  group    Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  bookings GroupBooking[]
+
+  @@index([groupId])
+  @@index([availabilityStatus])
+  @@map("group_items")
+}
+
+model GroupBooking {
+  id             String        @id @default(uuid()) @db.Uuid
+  groupItemId    String        @map("group_item_id") @db.Uuid
+  bookedByUserId String        @map("booked_by_user_id") @db.Uuid
+  startDate      DateTime      @map("start_date")
+  endDate        DateTime      @map("end_date")
+  status         BookingStatus @default(BOOKED)
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  groupItem GroupItem @relation(fields: [groupItemId], references: [id], onDelete: Cascade)
+
+  @@index([groupItemId])
+  @@index([bookedByUserId])
+  @@index([status])
+  @@index([startDate, endDate])
+  @@map("group_bookings")
+}
+
+model GroupActionLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  groupId    String   @map("group_id") @db.Uuid
+  actorId    String   @map("actor_id") @db.Uuid
+  actionType String   @map("action_type")
+  targetType String?  @map("target_type")
+  targetId   String?  @map("target_id") @db.Uuid
+  notes      String?
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([actorId])
+  @@index([createdAt])
+  @@map("group_action_logs")
+}
+
+// ---------------------------------------------------------
+// ADVANCED MODERATION — WARN / SUSPEND / BAN
+// ---------------------------------------------------------
+
+model UserWarn {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  adminId      String   @map("admin_id") @db.Uuid
+  reason       String
+  acknowledged Boolean  @default(false)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([acknowledged])
+  @@map("user_warns")
+}
+
+model UserSuspension {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  adminId   String    @map("admin_id") @db.Uuid
+  reason    String
+  startAt   DateTime  @default(now()) @map("start_at")
+  endAt     DateTime  @map("end_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([endAt])
+  @@map("user_suspensions")
+}
+
+model UserBan {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @unique @map("user_id") @db.Uuid
+  adminId   String    @map("admin_id") @db.Uuid
+  reason    String
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_bans")
+}
+
+model AdminActionLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  adminId    String   @map("admin_id") @db.Uuid
+  action     String
+  targetType String   @map("target_type")
+  targetId   String   @map("target_id") @db.Uuid
+  reason     String?
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([adminId])
+  @@index([targetId])
+  @@index([createdAt])
+  @@map("admin_action_logs")
+}

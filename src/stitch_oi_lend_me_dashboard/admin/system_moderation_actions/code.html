@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Moderation Actions - Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16439c",
+                        "primary-dark": "#0f2f6e",
+                        "primary-light": "#3b6ccf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "surface-dark": "#1a2234",
+                        "surface-lighter": "#242e42",
+                        "danger": "#7f1d1d",
+                        "danger-border": "#991b1b",
+                        "warning": "#78350f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for logs */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(22, 67, 156, 0.05); 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(22, 67, 156, 0.2); 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(22, 67, 156, 0.4); 
+        }
+        
+        /* Danger pattern for ban zone */
+        .danger-pattern {
+            background-image: repeating-linear-gradient(45deg, rgba(127, 29, 29, 0.05) 0px, rgba(127, 29, 29, 0.05) 10px, transparent 10px, transparent 20px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-display min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<nav class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-surface-dark flex items-center justify-between px-6 z-20 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-primary font-bold text-xl tracking-tight">
+<span class="material-icons">gavel</span>
+<span>Oi! Admin</span>
+</div>
+<div class="h-6 w-px bg-slate-300 dark:bg-slate-700 mx-2"></div>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400">Moderation Console</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-surface-lighter text-slate-500 dark:text-slate-400">
+<span class="material-icons">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<div class="text-right hidden sm:block">
+<div class="text-sm font-semibold text-slate-900 dark:text-white">Admin_Sarah</div>
+<div class="text-xs text-slate-500 dark:text-slate-400">Security Level 4</div>
+</div>
+<div class="h-9 w-9 rounded bg-primary flex items-center justify-center text-white font-bold">AS</div>
+</div>
+</div>
+</nav>
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col lg:flex-row overflow-hidden max-h-[calc(100vh-64px)]">
+<!-- Left: Action Command Center -->
+<section class="flex-1 flex flex-col overflow-y-auto border-r border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark">
+<!-- Target Entity Header -->
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-surface-dark sticky top-0 z-10 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="relative">
+<img class="h-16 w-16 rounded object-cover border-2 border-slate-200 dark:border-slate-600" data-alt="Profile picture of the user being moderated" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl3_K1LmvyH9YC9i8xixoSxcqlkFcdhhkGDA1q_h7zkzlkiP4Yb-XnUBR7ce09kno7FomS8-iIc7DaS6MbOjlu9J8eLZ_OzEYNOOpB5Dw66TpHW_uPzqPiDrpkK1yopJJI_spg20onz_NbzuqbL8pNVEWGzfhFhfvxeGy5D3MMAucBlNVu55TSI7n3qgsJl5ewxglCdjmqhuMChrEihcmD4dkWCaefTy-OlREl0wVoO_NCCWIgvC4pH-4oXEXvCKxFdUC9ROelOFMu"/>
+<span class="absolute -bottom-1 -right-1 h-5 w-5 bg-red-500 border-2 border-white dark:border-surface-dark rounded-full flex items-center justify-center">
+<span class="material-icons text-white" style="font-size: 12px;">priority_high</span>
+</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Alex_Borrower</h1>
+<span class="px-2 py-0.5 rounded text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700">ID: 8291-A</span>
+</div>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-icons text-xs">email</span> alex.b@example.com</span>
+<span class="flex items-center gap-1"><span class="material-icons text-xs">calendar_today</span> Member since: Jan 2023</span>
+<span class="flex items-center gap-1 text-red-600 dark:text-red-400 font-medium"><span class="material-icons text-xs">gpp_bad</span> Trust Score: 12/100 (Critical)</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-2 text-sm font-medium rounded bg-white dark:bg-surface-lighter border border-slate-200 dark:border-slate-600 hover:border-primary dark:hover:border-primary text-slate-700 dark:text-slate-300 transition-colors flex items-center gap-2">
+<span class="material-icons text-base">visibility</span> View Public Profile
+                        </button>
+</div>
+</div>
+</div>
+<!-- Action Grid -->
+<div class="p-6">
+<h2 class="text-sm uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
+<span class="material-icons text-base">tune</span> Moderation Actions
+                </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-8">
+<!-- Warn User Card -->
+<div class="group relative bg-white dark:bg-surface-dark rounded-lg p-5 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 rounded bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-500">
+<span class="material-icons">warning</span>
+</div>
+<span class="text-xs font-mono text-slate-400">ACT-01</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Warn User</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Send an official warning via email and in-app notification.</p>
+<div class="text-xs font-medium text-primary flex items-center gap-1">
+                            SELECT TEMPLATE <span class="material-icons text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Lock Chat Card -->
+<div class="group relative bg-white dark:bg-surface-dark rounded-lg p-5 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+<span class="material-icons">chat_bubble_outline</span>
+</div>
+<span class="text-xs font-mono text-slate-400">ACT-02</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Lock Chat</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Prevent user from sending messages in active negotiations.</p>
+<div class="text-xs font-medium text-primary flex items-center gap-1">
+                            CONFIGURE LOCK <span class="material-icons text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Remove Item Card -->
+<div class="group relative bg-white dark:bg-surface-dark rounded-lg p-5 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-500">
+<span class="material-icons">remove_shopping_cart</span>
+</div>
+<span class="text-xs font-mono text-slate-400">ACT-03</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Remove Listings</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Delist specific items or all active listings from the marketplace.</p>
+<div class="text-xs font-medium text-primary flex items-center gap-1">
+                            SELECT ITEMS <span class="material-icons text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Temp Block Card -->
+<div class="group relative bg-white dark:bg-surface-dark rounded-lg p-5 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+<span class="material-icons">timer</span>
+</div>
+<span class="text-xs font-mono text-slate-400">ACT-04</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Temporarily Block</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Suspend account access for a set duration (24h, 7d, 30d).</p>
+<div class="text-xs font-medium text-primary flex items-center gap-1">
+                            SET DURATION <span class="material-icons text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Force Password Reset -->
+<div class="group relative bg-white dark:bg-surface-dark rounded-lg p-5 border border-slate-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-icons">lock_reset</span>
+</div>
+<span class="text-xs font-mono text-slate-400">ACT-05</span>
+</div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Force Reset</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Invalidate current session and require password change.</p>
+<div class="text-xs font-medium text-primary flex items-center gap-1">
+                            EXECUTE <span class="material-icons text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700">
+<h2 class="text-sm uppercase tracking-wider font-semibold text-red-600 dark:text-red-500 mb-4 flex items-center gap-2">
+<span class="material-icons text-base">dangerous</span> Irreversible Actions
+                    </h2>
+<div class="danger-pattern border border-red-200 dark:border-danger-border/30 rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+<div class="absolute inset-0 bg-red-50 dark:bg-danger/5 z-0 pointer-events-none"></div>
+<div class="relative z-10 flex-1">
+<h3 class="text-xl font-bold text-red-700 dark:text-red-400 mb-2">Permanently Ban User</h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 max-w-xl">
+                                This action will immediately terminate the user's account, remove all active listings, and blacklist their payment methods. This action cannot be undone without CTO approval.
+                            </p>
+</div>
+<div class="relative z-10">
+<button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded shadow-lg shadow-red-600/20 active:scale-95 transition-all flex items-center gap-2" onclick="document.getElementById('ban-modal').classList.remove('hidden')">
+<span class="material-icons">gavel</span> BAN USER
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right: Log & Context Panel -->
+<aside class="w-full lg:w-96 border-l border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0d121c] flex flex-col">
+<!-- Context Stats -->
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Risk Factors</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-slate-600 dark:text-slate-400">Report Frequency</span>
+<span class="text-red-500 font-bold">High</span>
+</div>
+<div class="h-1.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 w-[85%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-slate-600 dark:text-slate-400">Chat Toxicity</span>
+<span class="text-yellow-500 font-bold">Medium</span>
+</div>
+<div class="h-1.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-yellow-500 w-[45%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-slate-600 dark:text-slate-400">Dispute Rate</span>
+<span class="text-primary font-bold">Low</span>
+</div>
+<div class="h-1.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[12%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit Log -->
+<div class="flex-1 overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-[#0d121c]">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500">Live Audit Log</h3>
+<button class="text-xs text-primary hover:text-primary-light">View All</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+<!-- Log Item 1 -->
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600 mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-700 my-1"></div>
+</div>
+<div class="pb-2">
+<div class="text-xs font-mono text-slate-400 mb-0.5">Today, 10:02 AM</div>
+<div class="text-sm text-slate-800 dark:text-slate-200">
+<span class="font-semibold text-primary">Admin_Sarah</span> locked chat thread <a class="underline decoration-slate-600" href="#">#9921</a>.
+                            </div>
+<div class="mt-1 text-xs text-slate-500 dark:text-slate-500 italic">"Preventing escalation of verbal abuse."</div>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="h-2 w-2 rounded-full bg-red-400 mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-700 my-1"></div>
+</div>
+<div class="pb-2">
+<div class="text-xs font-mono text-slate-400 mb-0.5">Today, 09:45 AM</div>
+<div class="text-sm text-slate-800 dark:text-slate-200">
+<span class="font-semibold text-red-500">System</span> flagged suspicious login pattern.
+                            </div>
+<div class="mt-1 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-medium border border-red-200 dark:border-red-800/30">
+                                IP MISMATCH
+                            </div>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600 mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-700 my-1"></div>
+</div>
+<div class="pb-2">
+<div class="text-xs font-mono text-slate-400 mb-0.5">Yesterday, 4:20 PM</div>
+<div class="text-sm text-slate-800 dark:text-slate-200">
+<span class="font-semibold text-primary">Admin_Mike</span> resolved Ticket <a class="underline decoration-slate-600" href="#">#8822</a>.
+                            </div>
+</div>
+</div>
+<!-- Log Item 4 -->
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600 mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-700 my-1"></div>
+</div>
+<div class="pb-2">
+<div class="text-xs font-mono text-slate-400 mb-0.5">Jan 12, 11:30 AM</div>
+<div class="text-sm text-slate-800 dark:text-slate-200">
+                                User updated profile description.
+                            </div>
+</div>
+</div>
+<!-- Log Item 5 -->
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="h-2 w-2 rounded-full bg-yellow-400 mt-1.5"></div>
+</div>
+<div class="pb-2">
+<div class="text-xs font-mono text-slate-400 mb-0.5">Jan 10, 09:15 AM</div>
+<div class="text-sm text-slate-800 dark:text-slate-200">
+<span class="font-semibold text-primary">Admin_System</span> issued auto-warning (Keyword Filter).
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Notes Quick View -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-surface-dark">
+<label class="block text-xs font-medium text-slate-500 mb-2">INTERNAL NOTES</label>
+<textarea class="w-full bg-slate-50 dark:bg-[#0d121c] border border-slate-200 dark:border-slate-700 rounded p-2 text-sm text-slate-700 dark:text-slate-300 h-24 focus:ring-1 focus:ring-primary focus:border-primary outline-none resize-none" placeholder="Add a quick note about this user..."></textarea>
+<div class="flex justify-end mt-2">
+<button class="px-3 py-1 text-xs font-medium bg-primary text-white rounded hover:bg-primary-light">Save Note</button>
+</div>
+</div>
+</aside>
+</main>
+<!-- Confirmation Modal (Hidden by default) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center hidden" id="ban-modal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm" onclick="document.getElementById('ban-modal').classList.add('hidden')"></div>
+<!-- Modal Content -->
+<div class="relative bg-white dark:bg-surface-dark w-full max-w-lg rounded-lg shadow-2xl border border-red-500/30 transform transition-all">
+<div class="p-6 border-b border-slate-200 dark:border-slate-700 flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-red-100 dark:bg-red-900/20 rounded-full text-red-600">
+<span class="material-icons">gavel</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Confirm Permanent Ban</h3>
+<p class="text-sm text-slate-500">Case #8291-A</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-slate-500" onclick="document.getElementById('ban-modal').classList.add('hidden')">
+<span class="material-icons">close</span>
+</button>
+</div>
+<div class="p-6 space-y-4">
+<div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 p-3 rounded text-sm text-red-800 dark:text-red-300">
+<strong>Warning:</strong> This action is severe. The user will lose access immediately. Only proceed if the user has violated <a class="underline" href="#">Level 4 Policies</a>.
+                </div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Reason for Ban</label>
+<select class="w-full bg-slate-50 dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded px-3 py-2 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none dark:text-white">
+<option>Fraudulent Activity</option>
+<option>Harassment / Hate Speech</option>
+<option>Illegal Item Listing</option>
+<option>Repeat Violation of TOS</option>
+<option>Other (See Notes)</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Admin Confirmation Note</label>
+<textarea class="w-full bg-slate-50 dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded px-3 py-2 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none dark:text-white" placeholder="Explain why this action is necessary..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Type "BAN" to confirm</label>
+<input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded px-3 py-2 text-sm focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none dark:text-white placeholder:text-slate-400" placeholder="" type="text"/>
+</div>
+</div>
+<div class="p-6 bg-slate-50 dark:bg-[#151b28] rounded-b-lg flex justify-end gap-3 border-t border-slate-200 dark:border-slate-700">
+<button class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-surface-lighter rounded transition-colors" onclick="document.getElementById('ban-modal').classList.add('hidden')">Cancel</button>
+<button class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded shadow-lg shadow-red-600/20 transition-colors">Execute Ban</button>
+</div>
+</div>
+</div>
+</body></html>

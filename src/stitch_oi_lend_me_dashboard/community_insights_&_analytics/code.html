@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Insights | Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4d9dff",
+              "background-light": "#f5f7f8",
+              "background-dark": "#0f1823",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel:hover {
+            border: 1px solid rgba(77, 157, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-extrabold leading-tight tracking-[-0.015em]">Oi! Lend Me</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full">
+<div class="text-slate-400 flex border-none bg-slate-100 dark:bg-slate-800/50 items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-slate-800/50 focus:ring-0 text-slate-900 dark:text-white placeholder:text-slate-500 rounded-r-xl px-4 text-sm" placeholder="Search insights..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-semibold" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-semibold" href="#">Marketplace</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Analytics</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-semibold" href="#">My Items</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary text-white text-sm font-bold hover:brightness-110 transition-all">
+<span>Lend Item</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/20" data-alt="Avatar of user profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmuv_ZCV16GdTWrMT60KH1gKYDYydkPLwunJLr0Tvo3vGWBaS9kokAq4Q5agNmVBTYS-lOTLyOgctIuiSa7aY09RRDcMKbFbsYMbDtiwxJUtO3Q5A_EA3NaaujNEXazhZEgiMJmJcyPl3LGMHiuuB5TajK6OK19uu5J3o7HO3DxU6ScYsCmI1chApTtNRkZPO5_GftVyB1AGLBdraeB2p4axeCG--eigxKGZB-p5iqplGtH1oQcWfTJ24_dPwNllhTQd8Kmt7jlumH");'></div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-6 sm:px-10 md:px-20 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-4 p-4 mb-4">
+<div class="flex min-w-72 flex-col gap-3">
+<p class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Community Insights</p>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Real-time pulse of your campus lending circle. Sharing is caring!</p>
+</div>
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-xl h-11 px-6 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-xl">download</span>
+<span>Monthly Report</span>
+</button>
+</div>
+<!-- Stats Summary -->
+<div class="flex flex-wrap gap-6 p-4">
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-2xl p-6 glass-panel transition-all shadow-sm">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">share_reviews</span>
+<p class="text-sm font-semibold uppercase tracking-wider opacity-80">Total Items Shared</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">1,284</p>
+<span class="text-emerald-500 text-sm font-bold">+12%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-2">
+<div class="bg-primary h-full rounded-full" style="width: 70%"></div>
+</div>
+</div>
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-2xl p-6 glass-panel transition-all shadow-sm">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-semibold uppercase tracking-wider opacity-80">Active Borrowers</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">456</p>
+<span class="text-emerald-500 text-sm font-bold">+5%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-2">
+<div class="bg-primary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex min-w-[200px] flex-1 flex-col gap-2 rounded-2xl p-6 glass-panel transition-all shadow-sm">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+<p class="text-sm font-semibold uppercase tracking-wider opacity-80">Trust Rating</p>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">4.9/5</p>
+<span class="text-emerald-500 text-sm font-bold">+0.2%</span>
+</div>
+<div class="flex gap-1 mt-2">
+<span class="material-symbols-outlined text-amber-400 text-xs">star</span>
+<span class="material-symbols-outlined text-amber-400 text-xs">star</span>
+<span class="material-symbols-outlined text-amber-400 text-xs">star</span>
+<span class="material-symbols-outlined text-amber-400 text-xs">star</span>
+<span class="material-symbols-outlined text-amber-400 text-xs">star</span>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold px-4 pb-4 pt-8">Lending Activity Overview</h2>
+<div class="flex flex-wrap gap-6 px-4 py-2">
+<!-- Top Borrowed Categories - Bar Chart -->
+<div class="flex min-w-72 flex-[1.2] flex-col gap-4 rounded-2xl glass-panel p-8">
+<div>
+<p class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-1">Top Borrowed Categories</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-extrabold">Electronics</p>
+<span class="text-emerald-500 text-sm font-bold">+8%</span>
+</div>
+</div>
+<div class="grid min-h-[220px] gap-x-6 gap-y-5 grid-cols-[80px_1fr] items-center pt-4">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase">Electronics</p>
+<div class="h-8 flex-1 bg-slate-100 dark:bg-slate-800/50 rounded-lg overflow-hidden relative">
+<div class="bg-primary/80 h-full rounded-r-lg shadow-[0_0_15px_rgba(77,157,255,0.3)] transition-all" style="width: 85%;"></div>
+<span class="absolute right-3 top-1.5 text-[10px] font-bold text-white">85%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase">Books</p>
+<div class="h-8 flex-1 bg-slate-100 dark:bg-slate-800/50 rounded-lg overflow-hidden relative">
+<div class="bg-primary/60 h-full rounded-r-lg shadow-[0_0_10px_rgba(77,157,255,0.2)] transition-all" style="width: 65%;"></div>
+<span class="absolute right-3 top-1.5 text-[10px] font-bold text-white">65%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase">Kitchen</p>
+<div class="h-8 flex-1 bg-slate-100 dark:bg-slate-800/50 rounded-lg overflow-hidden relative">
+<div class="bg-primary/40 h-full rounded-r-lg transition-all" style="width: 50%;"></div>
+<span class="absolute right-3 top-1.5 text-[10px] font-bold text-white">50%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase">Tools</p>
+<div class="h-8 flex-1 bg-slate-100 dark:bg-slate-800/50 rounded-lg overflow-hidden relative">
+<div class="bg-primary/30 h-full rounded-r-lg transition-all" style="width: 40%;"></div>
+<span class="absolute right-3 top-1.5 text-[10px] font-bold text-white">40%</span>
+</div>
+</div>
+<p class="text-slate-500 text-[11px] italic mt-2">Based on activity from the last 30 days</p>
+</div>
+<!-- Peak Lending Times - Line Chart -->
+<div class="flex min-w-72 flex-1 flex-col gap-4 rounded-2xl glass-panel p-8">
+<div>
+<p class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-1">Peak Lending Times</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-extrabold">2PM - 6PM</p>
+<span class="text-rose-500 text-sm font-bold">-2%</span>
+</div>
+</div>
+<div class="flex min-h-[220px] flex-1 flex-col gap-6 py-4">
+<div class="relative flex-1 group">
+<svg fill="none" height="100%" preserveaspectratio="none" viewbox="0 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="glowGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4d9dff" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#4d9dff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Path -->
+<path d="M0 100C30 90 60 40 90 40C120 40 150 110 180 110C210 110 240 20 270 20C300 20 330 130 360 130C390 130 420 70 478 70V150H0V100Z" fill="url(#glowGradient)"></path>
+<!-- Line Path -->
+<path d="M0 100C30 90 60 40 90 40C120 40 150 110 180 110C210 110 240 20 270 20C300 20 330 130 360 130C390 130 420 70 478 70" filter="drop-shadow(0 0 4px rgba(77,157,255,0.5))" stroke="#4d9dff" stroke-linecap="round" stroke-width="3"></path>
+<!-- Data Points -->
+<circle cx="90" cy="40" fill="#4d9dff" r="4"></circle>
+<circle cx="270" cy="20" fill="#4d9dff" r="4"></circle>
+<circle cx="360" cy="130" fill="#4d9dff" r="4"></circle>
+</svg>
+</div>
+<div class="flex justify-between px-2">
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Mon</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Tue</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Wed</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Thu</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Fri</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Sat</p>
+<p class="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase">Sun</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Latest Achievements & Map placeholder -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 mt-8">
+<div class="glass-panel rounded-2xl p-6">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">military_tech</span>
+                            Community Milestones
+                        </h3>
+<div class="space-y-4">
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">Carbon Offset Reached</p>
+<p class="text-slate-500 text-xs">Your community saved 45kg of CO2 this month.</p>
+</div>
+</div>
+<div class="flex gap-4 items-center">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">High Trust Tier</p>
+<p class="text-slate-500 text-xs">98% of returns were on time and in perfect condition.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-2xl p-6 relative overflow-hidden h-[200px]">
+<div class="absolute inset-0 opacity-20 grayscale brightness-50" data-alt="Abstract map of campus lending locations" data-location="Stanford University" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdy5J6wDtSLhOisiD9dZOJB7tF0vLb-pDq07nVf66yK1d-_pAUDMfRA4L0e2rDRvm6tXx8eainM8qJ_zqf-CkuKbddgqr9lwARAAFREBajEaCUKjawJ4iwng4HnXmkxLKfo_aaooaxKoTnMni7FkdZ0Q5bG38rbutDBZvejYoFLaD9W9iETtW5MQW_Ooyo283EST65tadp_l1kxv3pXdX_rVgc9083uK0l78GzUwIf99veBnPvGqd31D8Dh9ExGz13Nxx2QDXkvXW6'); background-size: cover; background-position: center;"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                                    Active Zones
+                                </h3>
+<p class="text-slate-400 text-xs font-medium">Most items are shared near West Dorms.</p>
+</div>
+<button class="w-fit text-primary text-xs font-bold uppercase tracking-widest hover:underline">View Heatmap</button>
+</div>
+</div>
+</div>
+<!-- Footer spacer -->
+<div class="h-20"></div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

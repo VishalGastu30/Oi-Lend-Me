@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Value Stack - Oi! Lend Me</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#519dfb",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                        "surface-dark": "#1b2431",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px" },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                },
+            },
+        }
+    </script>
+<style>.glass-card {
+            background: rgba(27, 36, 49, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            background: rgba(27, 36, 49, 0.6);
+            border: 1px solid rgba(81, 157, 251, 0.3);
+            box-shadow: 0 0 30px rgba(81, 157, 251, 0.1);
+        }
+        .accent-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(81, 157, 251, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px]"></div>
+</div>
+<div class="layout-container flex h-full grow flex-col relative z-10">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-10 md:py-20">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1 gap-12">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-primary backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Premium Membership Value</span>
+</div>
+<h2 class="text-white text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                            Built for Campuses. Free for Students.
+                        </h2>
+<p class="text-slate-400 text-lg max-w-2xl">
+                            No subscriptions. No hidden costs. Just trust, accountability, and community.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card flex flex-col gap-6 rounded-2xl p-6 transition-all duration-300 group">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-200 text-lg font-bold leading-tight">Tier 1: Campus Access</h3>
+</div>
+<div class="w-full h-px bg-white/10"></div>
+<div class="flex flex-col gap-3">
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Verified student-only network</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Borrow &amp; lend within college</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>No outsiders</span>
+</div>
+</div>
+</div>
+<div class="glass-card flex flex-col gap-6 rounded-2xl p-6 transition-all duration-300 group">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-200 text-lg font-bold leading-tight">Tier 2: Trust Engine</h3>
+</div>
+<div class="w-full h-px bg-white/10"></div>
+<div class="flex flex-col gap-3">
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Karma-based reputation</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Late returns affect credibility</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Built-in accountability</span>
+</div>
+</div>
+</div>
+<div class="glass-card flex flex-col gap-6 rounded-2xl p-6 transition-all duration-300 group">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-200 text-lg font-bold leading-tight">Tier 3: Community Lending</h3>
+</div>
+<div class="w-full h-px bg-white/10"></div>
+<div class="flex flex-col gap-3">
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Clubs &amp; group gear</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Shared calendars</span>
+</div>
+<div class="text-sm font-medium text-slate-300 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Admin controls</span>
+</div>
+</div>
+</div>
+<div class="glass-card flex flex-col gap-6 rounded-2xl p-6 relative overflow-hidden ring-1 ring-primary/50 shadow-[0_0_40px_rgba(81,157,251,0.15)] group">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-80"></div>
+<div class="flex flex-col gap-2 relative z-10">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-lg font-bold leading-tight">Tier 4: Smart Coordination</h3>
+<span class="text-[#0f1823] text-[10px] uppercase font-bold tracking-wider rounded-full bg-primary px-2 py-1">Featured</span>
+</div>
+</div>
+<div class="w-full h-px bg-white/10 relative z-10"></div>
+<div class="flex flex-col gap-3 relative z-10">
+<div class="text-sm font-medium text-white flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Context-based chat</span>
+</div>
+<div class="text-sm font-medium text-white flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Item-linked conversations</span>
+</div>
+<div class="text-sm font-medium text-white flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">check_circle</span>
+<span>Clear approvals</span>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 w-32 h-32 bg-primary/20 blur-[50px] rounded-full pointer-events-none"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="glass-card flex items-center justify-between p-8 rounded-2xl">
+<div class="flex flex-col gap-1">
+<span class="text-slate-400 text-sm font-semibold uppercase tracking-wider">All features. Zero cost.</span>
+<span class="text-white text-lg font-medium leading-relaxed">Because sharing works best when money isn’t the incentive.</span>
+</div>
+<div class="h-12 w-12 shrink-0 rounded-full bg-white/5 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-[28px]">favorite</span>
+</div>
+</div>
+<div class="glass-card flex items-center justify-between p-8 rounded-2xl border-primary/30 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="flex flex-col gap-1 relative z-10">
+<span class="text-primary text-sm font-semibold uppercase tracking-wider mb-1">Requires student sign-up</span>
+<span class="text-primary text-3xl md:text-4xl font-extrabold tracking-tight drop-shadow-[0_0_15px_rgba(81,157,251,0.5)]">Free — Campus Exclusive</span>
+</div>
+<div class="h-12 w-12 shrink-0 rounded-full bg-primary/20 flex items-center justify-center text-primary relative z-10">
+<span class="material-symbols-outlined text-[28px]">school</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center pt-8 pb-10 text-center space-y-8">
+<div class="space-y-4 max-w-2xl">
+<h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                                Start Sharing Today
+                            </h2>
+<p class="text-slate-400 text-lg">
+                                Join the largest student sharing economy simply by verifying your student email.
+                            </p>
+</div>
+<button class="relative group cursor-pointer overflow-hidden rounded-xl bg-primary px-8 py-4 transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(81,157,251,0.4)]">
+<div class="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 group-hover:translate-y-0"></div>
+<span class="relative flex items-center gap-2 text-[#0f1823] text-lg font-bold">
+<span>Get Started for Free</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</span>
+</button>
+<p class="text-xs text-slate-500">
+                            *Requires valid .edu email address for verification.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

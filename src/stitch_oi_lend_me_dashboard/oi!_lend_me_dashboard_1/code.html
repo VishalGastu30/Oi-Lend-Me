@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        @layer components {.GlassCard {
+                @apply bg-[rgba(39,47,58,0.4)] backdrop-blur-[12px] border border-white/10 rounded-2xl p-6 transition-all duration-300;
+            }
+            .GlassCard-hover {
+                @apply hover:border-primary/50 hover:bg-[rgba(39,47,58,0.6)] hover:translate-y-[-2px];
+            }.ActionTrigger {
+                @apply flex items-center justify-center gap-2 bg-[#4f9dff] text-white font-bold px-5 py-2.5 rounded-xl 
+                       transition-all duration-200 shadow-lg shadow-blue-500/20 
+                       hover:brightness-110 hover:shadow-blue-500/40 active:scale-95 text-sm;
+            }
+            .ActionTrigger-secondary {
+                @apply flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold px-5 py-2.5 rounded-xl 
+                       transition-all duration-200 hover:bg-white/10 active:scale-95 text-sm;
+            }
+            .ActionTrigger-sm {
+                @apply px-4 py-2 text-xs rounded-lg;
+            }
+        }
+        :root {
+            --primary: #4f9dff;
+            --background-dark: #0b0f1a;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f9dff",
+                        "background-dark": "#0b0f1a",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-dark min-h-screen text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-dark/80 backdrop-blur-md px-6 md:px-20 py-4">
+<div class="mx-auto flex max-w-[1200px] items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-xl bg-primary shadow-[0_0_20px_rgba(79,157,255,0.4)]">
+<span class="material-symbols-outlined text-white">handshake</span>
+</div>
+<h2 class="text-xl font-extrabold tracking-tight text-white">Oi! Lend Me</h2>
+</div>
+<div class="flex flex-1 items-center justify-end gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-semibold text-slate-300 hover:text-primary transition-colors" href="#">Browse</a>
+<a class="text-sm font-semibold text-slate-300 hover:text-primary transition-colors" href="#">Groups</a>
+<a class="text-sm font-semibold text-slate-300 hover:text-primary transition-colors" href="#">My Items</a>
+</nav>
+<div class="h-6 w-px bg-white/10 hidden md:block"></div>
+<div class="flex items-center gap-4">
+<button class="ActionTrigger-secondary ActionTrigger-sm">
+                            Profile
+                        </button>
+<div class="size-10 rounded-full border-2 border-primary/50 p-0.5">
+<div class="h-full w-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASsZBJGZmZW9PdhAJ1WH4sPs1HZgNqqLCAwQK0gptCh036MQmMM7wHqJVHAWglwTwByEUddTLMhYcxymNuJI8L5o4gYofYwQ7K3e7MCyIM8heBukHaa1BcNoLYfJlfyxMkHScU7GAaj4fKS3_0RVbL0yC4XlWwQlmXy3bUm5S6cEf5sH-jghBqE7yowfEseRPVgV6z9_2_f26vdT6VyRDPXHMVEh3Ip5XUQjL3YyzXN7nRM--7P8HrSMAJ55LQ-3oxz-7NSyy2G3Nt");'></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 md:px-20 py-10">
+<div class="mx-auto max-w-[1200px]">
+<section class="flex flex-col items-center text-center mb-12">
+<h1 class="text-white tracking-tight text-4xl md:text-5xl font-extrabold leading-tight mb-8">
+                        Oi! What do you need today, Alex? 🔥
+                    </h1>
+<div class="w-full max-w-2xl px-4">
+<div class="GlassCard !p-0 flex h-16 w-full items-center px-6 shadow-2xl">
+<span class="material-symbols-outlined text-primary text-2xl mr-3">search</span>
+<input class="w-full border-none bg-transparent text-lg text-white placeholder:text-slate-400 focus:outline-none focus:ring-0" placeholder="Search for books, chargers, or a quick favor..."/>
+<kbd class="hidden md:inline-flex h-8 items-center gap-1 rounded border border-white/20 bg-white/5 px-2 font-mono text-[10px] font-medium text-slate-400 opacity-100">
+<span>⌘</span>K
+                            </kbd>
+</div>
+</div>
+<div class="flex gap-3 mt-8 flex-wrap justify-center">
+<button class="ActionTrigger">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                            Available
+                        </button>
+<button class="ActionTrigger-secondary">
+<span class="material-symbols-outlined text-sm text-red-400">priority_high</span>
+                            Urgent
+                        </button>
+<button class="ActionTrigger-secondary">
+<span class="material-symbols-outlined text-sm text-green-400">near_me</span>
+                            Near You
+                        </button>
+<button class="ActionTrigger-secondary">
+<span class="material-symbols-outlined text-sm text-amber-400">star</span>
+                            Top Rated
+                        </button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2">
+<div class="flex items-center justify-between mb-6 px-2">
+<h2 class="text-2xl font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-red-400">campaign</span>
+                                Urgent Requests
+                            </h2>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">See all</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="GlassCard GlassCard-hover cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-red-500/10 text-red-400 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md">15 mins left</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary">more_horiz</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">TI-84 Calculator</h3>
+<p class="text-slate-400 text-sm mb-6">Exam in Hall B at 2 PM. Help a brother out! 🙏</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBWaad2n9ynPn20TZWkFIO1M6X2EpANT4XsX3U2P0b4YI4AMsw01wObOpF3hlFLZjzjZ5J6wfl6DiB53EcYWiBEFe9ejwhUDdJUrCWQLlS7RfAKs12Sy83INkoYKUGXP2rWZ6hxd1DBdq-RwGntlB_smETmF-TtstkfVlCWVbVrbr_xOitv_1-GLvLFjRTuNmkeXlTAGvbl4WBtzbtx0hqPWHN3ZgULEocVLGuPZiOLwqGd_pvO-nOlvr-07MaWP4JvMfy6A8Zx81r7');"></div>
+<span class="text-xs font-medium text-slate-300">Sarah M.</span>
+</div>
+<button class="ActionTrigger ActionTrigger-sm">Lend</button>
+</div>
+</div>
+<div class="GlassCard GlassCard-hover cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md">ASAP</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary">more_horiz</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">USB-C to HDMI</h3>
+<p class="text-slate-400 text-sm mb-6">Need it for a presentation in the Library. 1 hour max.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-8 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFPVpH1p83qhG2hm9VsHY02G99ZYsPqarqj63-b_l6h_8KTdUMJZbc9fpIWyZAPJ0QoGlc2UVQlqmR14c2sdCUlHdRSBsfIgGtezaT0QBYRe4pU9iO5AeDsbVpJaT9qtlvU7jT3GEckOqWQqURNRvLfSMo_CufVb5Ow4imx_LWgXDTGeBpheqXzRZS8oJ-JY8dgKXBPcW18-3PAN43uxSsFiKcGk_otegGhf4BKxzjig7LUA3Tgrp8bA0qCBAD9hQ93uViNv7ZiF13');"></div>
+<span class="text-xs font-medium text-slate-300">Jordan K.</span>
+</div>
+<button class="ActionTrigger ActionTrigger-sm">Lend</button>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1">
+<div class="flex items-center justify-between mb-6 px-2">
+<h2 class="text-2xl font-bold text-white">Recent Borrows</h2>
+<span class="material-symbols-outlined text-slate-400">history</span>
+</div>
+<div class="space-y-4">
+<div class="GlassCard !p-4 flex items-center gap-4">
+<div class="size-12 rounded-xl bg-slate-800 flex items-center justify-center border border-white/5">
+<span class="material-symbols-outlined text-primary">book</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-white">Macroeconomics Vol 2</h4>
+<p class="text-[11px] text-slate-500">Returned 2h ago to Mike</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+</div>
+</div>
+</div>
+<div class="GlassCard !p-4 flex items-center gap-4">
+<div class="size-12 rounded-xl bg-slate-800 flex items-center justify-center border border-white/5">
+<span class="material-symbols-outlined text-primary">electric_bike</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-white">Electric Pump</h4>
+<p class="text-[11px] text-slate-500">Borrowed yesterday from Lily</p>
+</div>
+<button class="text-xs font-bold text-primary hover:underline">Review</button>
+</div>
+<div class="mt-8 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-6 border border-primary/20 backdrop-blur-sm">
+<h4 class="text-white font-bold mb-1">Your Karma Score</h4>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="text-3xl font-black text-primary">842</span>
+<span class="text-xs text-slate-400">Top 5% on Campus</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full shadow-[0_0_10px_#4f9dff]"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-3 italic">"You're a campus legend, Alex! Keep it up."</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed bottom-8 right-8">
+<button class="size-16 rounded-full bg-primary flex items-center justify-center text-white shadow-2xl shadow-primary/50 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</div>
+</main>
+<footer class="mt-20 border-t border-white/5 py-10 px-6 md:px-20">
+<div class="mx-auto max-w-[1200px] flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-sm">handshake</span>
+<p class="text-xs font-medium">© 2024 Oi! Lend Me. Don't be a stranger.</p>
+</div>
+<div class="flex gap-8 opacity-50">
+<a class="text-xs hover:text-primary transition-colors" href="#">Safety Guidelines</a>
+<a class="text-xs hover:text-primary transition-colors" href="#">Campus Map</a>
+<a class="text-xs hover:text-primary transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

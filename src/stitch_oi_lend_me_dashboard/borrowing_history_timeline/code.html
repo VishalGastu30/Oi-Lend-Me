@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Borrowing History Timeline - Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(39, 47, 58, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-white/10 px-10 py-3 glass sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-extrabold leading-tight tracking-[-0.015em]">Oi! Lend Me</h2>
+</div>
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full glass border-none">
+<div class="text-[#9aa9bc] flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:outline-0 focus:ring-0 text-white placeholder:text-[#9aa9bc] px-4 text-base font-normal leading-normal" placeholder="Search items..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-white text-sm font-semibold leading-normal hover:text-primary transition-colors" href="#">Browse</a>
+<a class="text-white text-sm font-semibold leading-normal hover:text-primary transition-colors" href="#">My Items</a>
+<a class="text-primary text-sm font-semibold leading-normal" href="#">Borrow History</a>
+<a class="text-white text-sm font-semibold leading-normal hover:text-primary transition-colors" href="#">Profile</a>
+</div>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-white/10 text-white px-3 hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-white/10 text-white px-3 hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/50" data-alt="User profile avatar with colorful abstract pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmnKxHzpF13GxNsMiuW4uKt35geh4Nf6UzI2K3gS9DgLVWN8CYN4Uq1BY9ILkMzOIRnsGhDsW5XqlHPglPfMKortub6qP9728Rw55aJXLPGAKY2jOGJltj4Ss2jy7Lo_dvpXd122wZ0TbGqle_CQabrV19-9_ks7Ag7fZg73gGUgK7fqfFr59_s9x-vGLWfUnNJ8gTHo0Y0TkbozQ7c7sDE-iF7ggnBtmWpYOfmg8OHNBFnXmCTdPc74KiL-QgvmCX4acbTPVXULF7");'></div>
+</div>
+</header>
+<main class="flex flex-1 px-40 py-10 gap-10">
+<!-- SideNavBar -->
+<aside class="w-64 shrink-0">
+<div class="flex flex-col gap-6 glass p-6 rounded-xl sticky top-24">
+<div class="flex gap-3 items-center">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-sm font-bold">Lending Score</h1>
+<p class="text-green-400 text-xs font-medium">98% Reliability</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#9aa9bc] hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#9aa9bc] hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<p class="text-sm font-medium">Active Borrows</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl bg-primary text-white shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">history</span>
+<p class="text-sm font-medium">History</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-[#9aa9bc] hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Community</p>
+</a>
+</nav>
+<div class="mt-4 pt-4 border-t border-white/10">
+<p class="text-xs text-[#9aa9bc] font-bold uppercase tracking-wider mb-2 px-3">Quick Links</p>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-[#9aa9bc] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">stars</span>
+                                Rewards Program
+                            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm text-[#9aa9bc] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                                Safety Center
+                            </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col max-w-[800px]">
+<!-- PageHeading -->
+<div class="flex flex-col gap-2 mb-8">
+<h2 class="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Borrowing History</h2>
+<div class="flex items-center gap-4">
+<p class="text-[#9aa9bc] text-base font-normal leading-normal">Track your past borrows and respect points.</p>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20 uppercase tracking-widest">Premium Member</span>
+</div>
+</div>
+<!-- History Timeline Section -->
+<div class="glass rounded-xl p-8 shadow-2xl">
+<!-- SectionHeader -->
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Detailed Timeline View</h2>
+<button class="text-sm text-primary font-bold hover:underline">Download Report</button>
+</div>
+<!-- Timeline -->
+<div class="flex flex-col gap-0">
+<!-- Timeline Item: Today/Active Finish -->
+<div class="grid grid-cols-[40px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-1 pt-1">
+<div class="z-10 bg-background-dark p-1">
+<span class="material-symbols-outlined text-green-400 text-3xl">check_circle</span>
+</div>
+<div class="w-[2px] bg-white/10 h-12 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-10">
+<div class="flex items-center gap-2 mb-1">
+<p class="text-white text-lg font-bold">Returned - Vintage Camera</p>
+<span class="px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] font-bold rounded uppercase">On Time</span>
+</div>
+<p class="text-[#9aa9bc] text-base font-normal">Oi! Returned on time. Respect 🤝</p>
+<p class="text-xs text-[#64748b] mt-2">Nov 15, 2023 • 2:30 PM</p>
+</div>
+</div>
+<!-- Timeline Item: Picked Up -->
+<div class="grid grid-cols-[40px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-[2px] bg-white/10 h-2"></div>
+<div class="z-10 bg-background-dark p-1">
+<span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
+</div>
+<div class="w-[2px] bg-white/10 h-12 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-10">
+<p class="text-white text-lg font-bold mb-1">Picked Up - Camping Tent</p>
+<p class="text-[#9aa9bc] text-base font-normal">Picked up from Sarah's Locker at Student Union</p>
+<p class="text-xs text-[#64748b] mt-2">Nov 12, 2023 • 10:15 AM</p>
+</div>
+</div>
+<!-- Timeline Item: Late Return -->
+<div class="grid grid-cols-[40px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-1">
+<div class="w-[2px] bg-white/10 h-2"></div>
+<div class="z-10 bg-background-dark p-1">
+<span class="material-symbols-outlined text-red-500 text-3xl">error_outline</span>
+</div>
+<div class="w-[2px] bg-white/10 h-12 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-10">
+<div class="flex items-center gap-2 mb-1">
+<p class="text-white text-lg font-bold">Returned - Mechanical Keyboard</p>
+<span class="px-2 py-0.5 bg-red-500/10 text-red-400 text-[10px] font-bold rounded uppercase">2 Hours Late</span>
+</div>
+<p class="text-[#9aa9bc] text-base font-normal">Oi! Try to be on time next time. -1 Respect Points 📉</p>
+<p class="text-xs text-[#64748b] mt-2">Oct 28, 2023 • 6:45 PM</p>
+</div>
+</div>
+<!-- Timeline Item: Request -->
+<div class="grid grid-cols-[40px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-1 pb-1">
+<div class="w-[2px] bg-white/10 h-2"></div>
+<div class="z-10 bg-background-dark p-1">
+<span class="material-symbols-outlined text-primary text-3xl">send</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col">
+<p class="text-white text-lg font-bold mb-1">Requested - Study Table Lamp</p>
+<p class="text-[#9aa9bc] text-base font-normal">Request sent to Mike's Dormitory</p>
+<p class="text-xs text-[#64748b] mt-2">Oct 25, 2023 • 09:00 AM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Upcoming Section Header -->
+<div class="flex items-center justify-between mt-12 mb-6 px-2">
+<div class="flex flex-col">
+<h3 class="text-xl font-bold text-white">Active Borrowings</h3>
+<p class="text-sm text-[#9aa9bc]">Items you currently have</p>
+</div>
+<button class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-sm font-bold transition-all border border-white/10">View All</button>
+</div>
+<!-- Active Card -->
+<div class="glass p-6 rounded-xl flex items-center justify-between group cursor-pointer hover:border-primary/50 transition-all">
+<div class="flex items-center gap-6">
+<div class="size-16 rounded-lg bg-cover bg-center" data-alt="Electric scooter on campus background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0sACad_g7IoXy28ish66bcQPsZDDQKQwHOq-5s1ZgDzZgRsFZ7DiUv0iCGthduoKwAOP3wosikdH2qXSxpy5rN8s3jh3r3ozFWA9OOFqz_JdkdjVLxBpuNnMAT_cIvilvHRr1wgfmrjAgvOCJ6LztNWcHPoDIc5xIdU4g7pM0MMJ020prInh4SP7uCyp_xm9hI3xRxfoSjeaJ1vfzP8yGlXjEEEclGVob3F6zzfKVbTFEbXTrVH1tVEvKRPap7fEoSws7rm5W82RN');"></div>
+<div class="flex flex-col gap-1">
+<h4 class="text-white font-bold text-lg">Electric Scooter</h4>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+<p class="text-sm text-[#9aa9bc]">Lent by Alex Rivers</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="text-right">
+<p class="text-xs text-[#9aa9bc] font-bold uppercase tracking-tighter">Due in</p>
+<p class="text-primary font-black text-xl leading-none">3h 42m</p>
+</div>
+<button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-lg hover:scale-105 transition-transform active:scale-95 shadow-lg shadow-primary/20">Return Now</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

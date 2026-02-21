@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me - Campus Sharing Reimagined</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f6eeb",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282f39] px-4 py-3 md:px-10">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Oi! Lend Me</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">How it Works</a>
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Safety</a>
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-slate-900 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Log In</a>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-all shadow-[0_0_15px_rgba(15,110,235,0.3)]">
+<span class="truncate">Get Early Access</span>
+</button>
+</div>
+<div class="md:hidden text-white">
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="layout-container flex h-full grow flex-col">
+<div class="w-full flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[1280px] flex-1 px-4 md:px-10 lg:px-40">
+<!-- Meta Text -->
+<div class="flex justify-center md:justify-start w-full">
+<p class="text-[#9ca9ba] text-sm font-bold tracking-widest leading-normal pb-3 pt-8 uppercase">CAMPUS SHARING REIMAGINED</p>
+</div>
+<!-- Hero Section -->
+<div class="@container w-full">
+<div class="flex flex-col gap-8 py-6 md:py-10 lg:flex-row items-center">
+<!-- Left Content -->
+<div class="flex flex-col gap-6 lg:w-1/2 lg:pr-8">
+<div class="flex flex-col gap-4 text-left">
+<h1 class="text-slate-900 dark:text-white text-5xl font-black leading-[1.1] tracking-[-0.033em] md:text-6xl lg:text-7xl">
+                                        Stop Buying,<br/><span class="text-primary">Start Borrowing.</span>
+</h1>
+<h2 class="text-slate-600 dark:text-[#9ca9ba] text-lg font-normal leading-relaxed md:text-xl max-w-lg">
+                                        The premium item-lending platform for your campus community. Secure, playful, and built on trust.
+                                    </h2>
+</div>
+<div class="flex flex-col gap-6 sm:flex-row sm:items-center pt-2">
+<button class="flex w-full sm:w-auto min-w-[160px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(15,110,235,0.5)] transform hover:scale-105">
+<span class="truncate">Get Early Access</span>
+<span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</button>
+<!-- Trust Signal (Avatar Group + Text) -->
+<div class="flex items-center gap-3">
+<div class="flex -space-x-3 overflow-hidden p-1">
+<div class="inline-block size-10 rounded-full ring-2 ring-background-dark bg-cover bg-center" data-alt="Portrait of a young student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYmAZiRldCcUwsizDrBG5eamGuahCcvb7gHpUmOGnmCAAHYgYTtkVTf1njPD6prPCznfMCB5Rh5X7nDepqBAQ5DfuVyIRt3e8oDlg_KU3el5MLQlA2dW9CRbvZmI4nyOJaaAzXwtW5M3qxdvFoEFZBSUA3Q79LZXmSO8YTwtxQkot6yv96nmP3tiqvT5_Th59yZFaVAOJwQzZ5VsQWQiC_8tvuYhBD3O8RPtTnAn7Kcsw3mqTPx-lc7xmTVw-9VdihruVR91wh7GTs");'></div>
+<div class="inline-block size-10 rounded-full ring-2 ring-background-dark bg-cover bg-center" data-alt="Portrait of a male student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2bugXLkvQ8YL9gUGX0Fux2F1cdWsRGP_Nxl671mRc_bRdShT4CU7bmCQ85vZ0pbXwJjlgAcw9BpQ3eiwxfWjzw_NS-BDrlEpTekaQo6ob_ORPi2lUNwxXuWDJxT0V8Zu2qB_KMd1LHn7cMons2aVD1xL7wZISCMgQa9FAtvA_KqxVNbgeRq9CfX0egWA46HsWlqCHT_Q7HqkVt0O-HHUtVGNERW-2EEDWVOYT66puwjT0QY8GbbK4RpeYVqmvokbggr-wCl0Zp9lB");'></div>
+<div class="inline-block size-10 rounded-full ring-2 ring-background-dark bg-cover bg-center" data-alt="Portrait of a female student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0kJZpzkCOEOUxN4srYobflZzckzRW65cl8zCoLQcpUcTICfl43s4HV4a1e_DHaOIj63D1ekEhp5xWShA9R7Xw8fsaIkkWGsRlE9g1HWHySHatxiNcRie5O_dBHIpP7P5M9A7U36bNlYM7Z3anW9tqncr0GTwhAwMS12tA5KSBYNylcBUYuE5LKGjn7eAtXz7rhC5pdYVRr0gj5sAuzeDgDBKHaJjxfD7lf91qov9uB8E6uRC23GREI1amb5TIsATGyy89lqfK_OWg");'></div>
+<div class="flex size-10 items-center justify-center rounded-full ring-2 ring-background-dark bg-[#282f39] text-xs font-medium text-white">500+</div>
+</div>
+<div class="flex flex-col">
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined text-yellow-500 text-[16px] leading-none">star</span>
+<span class="material-symbols-outlined text-yellow-500 text-[16px] leading-none">star</span>
+<span class="material-symbols-outlined text-yellow-500 text-[16px] leading-none">star</span>
+<span class="material-symbols-outlined text-yellow-500 text-[16px] leading-none">star</span>
+<span class="material-symbols-outlined text-yellow-500 text-[16px] leading-none">star</span>
+</div>
+<p class="text-slate-600 dark:text-[#9ca9ba] text-xs font-medium leading-tight pt-1">Trusted by students from top universities</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Visual -->
+<div class="w-full lg:w-1/2 relative mt-10 lg:mt-0">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent opacity-40 z-10"></div>
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="Students sharing a camera on campus" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDEzElHMHCqBZkPNarBYzUgkDzRv27QWEHW2TM67NnNIwV61MYjLbakLO2ULvy3LE5mIm9Wb5CTLzBJ4IuBc2jFCMlEkwazJD63fYe6RnAYtxF-F_-LifZyJDAiZ-COPLbm8dAzaSLAcQDL-X7PTtUbhGeHjqDHXastncmkDmKiXok9Ge_eyUiz-7zekczReJB42mwoHnvtmIj1v0W0Qf97A3AmtO1TULMsFBmgAkxeoRiwn8bE3UkiXeiJs3VvI7VYKL-Frmdd6ZUD");'>
+</div>
+<!-- Floating Card 1 -->
+<div class="absolute bottom-6 left-6 z-20 bg-[#1c232e]/90 backdrop-blur-md border border-white/10 p-3 rounded-xl flex items-center gap-3 shadow-lg max-w-[200px] animate-[bounce_3s_infinite]">
+<div class="bg-primary/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">camera_alt</span>
+</div>
+<div>
+<p class="text-white text-xs font-bold">Sony A7III</p>
+<p class="text-green-400 text-[10px] font-medium">Available now</p>
+</div>
+</div>
+<!-- Floating Card 2 -->
+<div class="absolute top-6 right-6 z-20 bg-[#1c232e]/90 backdrop-blur-md border border-white/10 p-3 rounded-xl flex items-center gap-3 shadow-lg max-w-[200px]">
+<div class="bg-purple-500/20 p-2 rounded-lg text-purple-400">
+<span class="material-symbols-outlined">headphones</span>
+</div>
+<div>
+<p class="text-white text-xs font-bold">QC 45 Headphones</p>
+<p class="text-[#9ca9ba] text-[10px] font-medium">Lent by Sarah</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me - The Sharing Journey</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for line connector effects */
+        .timeline-line {
+            position: relative;
+        }
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4d9dff, #394656);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased overflow-x-hidden">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-center py-10 lg:py-20">
+<!-- Header Section -->
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
+<h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+                Your Journey to <span class="text-primary">Clutter-Free Living</span>
+</h2>
+<p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Transform your campus life from overloaded to optimized in four simple stages.
+            </p>
+</div>
+<!-- Timeline Section -->
+<div class="layout-container flex justify-center w-full">
+<div class="layout-content-container flex flex-col max-w-[800px] w-full px-4 sm:px-6 lg:px-8">
+<!-- Stage 1 -->
+<div class="grid grid-cols-[60px_1fr] gap-x-6 group/item hover:bg-white/5 dark:hover:bg-white/5 p-4 rounded-xl transition-colors duration-300">
+<div class="flex flex-col items-center gap-2 pt-1 relative">
+<div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20 shadow-[0_0_15px_rgba(77,157,255,0.15)] z-10 group-hover/item:bg-primary group-hover/item:text-white group-hover/item:shadow-[0_0_20px_rgba(77,157,255,0.4)] transition-all duration-300">
+<span class="material-symbols-outlined text-primary group-hover/item:text-white text-[24px]">flag</span>
+</div>
+<div class="w-[2px] bg-gradient-to-b from-primary/30 to-gray-700/30 h-full grow absolute top-12 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-1 flex-col pb-8 pt-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="px-2 py-0.5 rounded text-xs font-bold bg-primary/10 text-primary uppercase tracking-wider">Stage 1</span>
+</div>
+<h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight mb-2 group-hover/item:text-primary transition-colors">Quick Win</h3>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+                            Sign up and find your first item instantly. No waiting, no hassle—just borrow what you need right now.
+                        </p>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="grid grid-cols-[60px_1fr] gap-x-6 group/item hover:bg-white/5 dark:hover:bg-white/5 p-4 rounded-xl transition-colors duration-300">
+<div class="flex flex-col items-center gap-2 pt-1 relative">
+<div class="w-[2px] bg-gray-700/30 h-4 absolute -top-4 left-1/2 -translate-x-1/2"></div>
+<div class="flex items-center justify-center w-12 h-12 rounded-full bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 z-10 group-hover/item:border-primary group-hover/item:bg-primary/5 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-hover/item:text-primary text-[24px]">trending_up</span>
+</div>
+<div class="w-[2px] bg-gradient-to-b from-gray-700/30 to-gray-700/30 h-full grow absolute top-12 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-1 flex-col pb-8 pt-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover/item:bg-primary/10 group-hover/item:text-primary transition-colors">Stage 2</span>
+</div>
+<h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight mb-2 group-hover/item:text-primary transition-colors">Compound</h3>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+                            Build your borrow score with every successful transaction. Higher trust means more access.
+                        </p>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="grid grid-cols-[60px_1fr] gap-x-6 group/item hover:bg-white/5 dark:hover:bg-white/5 p-4 rounded-xl transition-colors duration-300">
+<div class="flex flex-col items-center gap-2 pt-1 relative">
+<div class="w-[2px] bg-gray-700/30 h-4 absolute -top-4 left-1/2 -translate-x-1/2"></div>
+<div class="flex items-center justify-center w-12 h-12 rounded-full bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 z-10 group-hover/item:border-primary group-hover/item:bg-primary/5 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-hover/item:text-primary text-[24px]">lock_open</span>
+</div>
+<div class="w-[2px] bg-gradient-to-b from-gray-700/30 to-gray-700/30 h-full grow absolute top-12 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-1 flex-col pb-8 pt-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover/item:bg-primary/10 group-hover/item:text-primary transition-colors">Stage 3</span>
+</div>
+<h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight mb-2 group-hover/item:text-primary transition-colors">Advantage</h3>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+                            Unlock high-value group gear. Access premium items usually reserved for trusted community members.
+                        </p>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="grid grid-cols-[60px_1fr] gap-x-6 group/item hover:bg-white/5 dark:hover:bg-white/5 p-4 rounded-xl transition-colors duration-300">
+<div class="flex flex-col items-center gap-2 pt-1 relative">
+<div class="w-[2px] bg-gray-700/30 h-4 absolute -top-4 left-1/2 -translate-x-1/2"></div>
+<div class="flex items-center justify-center w-12 h-12 rounded-full bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 z-10 group-hover/item:border-primary group-hover/item:bg-primary/5 transition-all duration-300">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 group-hover/item:text-primary text-[24px]">diamond</span>
+</div>
+<!-- Last item doesn't need the bottom line connecting to nowhere -->
+</div>
+<div class="flex flex-1 flex-col pt-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover/item:bg-primary/10 group-hover/item:text-primary transition-colors">Stage 4</span>
+</div>
+<h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight mb-2 group-hover/item:text-primary transition-colors">10x</h3>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-relaxed">
+                            Live a lifestyle without the clutter. Experience true freedom and abundance through sharing.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="mt-12 flex justify-center">
+<button class="bg-primary hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-lg shadow-blue-500/30 transition-all transform hover:scale-105 flex items-center gap-2">
+                Start Your Journey
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

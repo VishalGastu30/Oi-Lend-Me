@@ -1,0 +1,112 @@
+// ---------------------------------------------------------
+// INSTITUTIONAL GROUPS SYSTEM
+// ---------------------------------------------------------
+
+model GroupRequest {
+  id               String             @id @default(uuid()) @db.Uuid
+  requesterId      String             @map("requester_id") @db.Uuid
+  groupName        String             @map("group_name")
+  category         GroupCategory
+  facultyEmail     String?            @map("faculty_email")
+  officialEmail    String?            @map("official_email")
+  shortDescription String?            @map("short_description")
+  status           GroupRequestStatus @default(PENDING)
+  reviewNotes      String?            @map("review_notes")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+
+  requester User         @relation("GroupRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  proofs    GroupProof[]
+
+  @@index([requesterId])
+  @@index([status])
+  @@map("group_requests")
+}
+
+model GroupProof {
+  id             String        @id @default(uuid()) @db.Uuid
+  groupRequestId String        @map("group_request_id") @db.Uuid
+  uploaderId     String        @map("uploader_id") @db.Uuid
+  fileUrl        String        @map("file_url")
+  fileType       ProofFileType @map("file_type")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  groupRequest GroupRequest @relation(fields: [groupRequestId], references: [id], onDelete: Cascade)
+
+  @@index([groupRequestId])
+  @@map("group_proofs")
+}
+
+model GroupJoinRequest {
+  id        String              @id @default(uuid()) @db.Uuid
+  groupId   String              @map("group_id") @db.Uuid
+  userId    String              @map("user_id") @db.Uuid
+  message   String?
+  status    JoinRequestStatus   @default(PENDING)
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([userId])
+  @@index([status])
+  @@map("group_join_requests")
+}
+
+model GroupItem {
+  id                 String                  @id @default(uuid()) @db.Uuid
+  groupId            String                  @map("group_id") @db.Uuid
+  name               String
+  description        String?
+  category           ItemCategory
+  condition          String?
+  availabilityStatus ItemAvailabilityStatus  @default(AVAILABLE) @map("availability_status")
+  imageUrls          String[]                @map("image_urls")
+  createdAt          DateTime                @default(now()) @map("created_at")
+  updatedAt          DateTime                @updatedAt @map("updated_at")
+
+  group    Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  bookings GroupBooking[]
+
+  @@index([groupId])
+  @@index([availabilityStatus])
+  @@map("group_items")
+}
+
+model GroupBooking {
+  id            String        @id @default(uuid()) @db.Uuid
+  groupItemId   String        @map("group_item_id") @db.Uuid
+  bookedByUserId String       @map("booked_by_user_id") @db.Uuid
+  startDate     DateTime      @map("start_date")
+  endDate       DateTime      @map("end_date")
+  status        BookingStatus @default(BOOKED)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  groupItem GroupItem @relation(fields: [groupItemId], references: [id], onDelete: Cascade)
+
+  @@index([groupItemId])
+  @@index([bookedByUserId])
+  @@index([status])
+  @@index([startDate, endDate])
+  @@map("group_bookings")
+}
+
+model GroupActionLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  groupId    String   @map("group_id") @db.Uuid
+  actorId    String   @map("actor_id") @db.Uuid
+  actionType String   @map("action_type")
+  targetType String?  @map("target_type")
+  targetId   String?  @map("target_id") @db.Uuid
+  notes      String?
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([actorId])
+  @@index([createdAt])
+  @@map("group_action_logs")
+}

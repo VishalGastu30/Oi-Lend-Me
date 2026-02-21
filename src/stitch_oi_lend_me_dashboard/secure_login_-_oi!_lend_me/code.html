@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure Login - Oi! Lend Me</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4d9dff",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0b0f1a",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(27, 32, 40, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mesh-bg {
+            background-color: #0b0f1a;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(77, 157, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(77, 157, 255, 0.1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen mesh-bg">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-6 lg:px-10 py-3">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Oi! Lend Me</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">How it Works</a>
+<a class="text-white/80 hover:text-white text-sm font-medium transition-colors" href="#">Browse Items</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 text-sm font-bold transition-all">
+<span>Help</span>
+</button>
+</div>
+</header>
+<!-- Main Login Content -->
+<main class="flex-1 flex flex-col items-center justify-center p-6 sm:p-12">
+<div class="glass-card w-full max-w-[480px] rounded-xl p-8 shadow-2xl">
+<!-- Headline -->
+<div class="text-center mb-8">
+<h1 class="text-white tracking-tight text-3xl font-bold leading-tight mb-2">Oi! Good to see you again.</h1>
+<p class="text-primary text-lg font-medium">Ready to share?</p>
+</div>
+<!-- Form Fields -->
+<form class="space-y-6" onsubmit="return false;">
+<div class="flex flex-col gap-2">
+<label class="flex flex-col w-full">
+<p class="text-white/90 text-sm font-medium pb-2 ml-1">College Email</p>
+<input class="form-input w-full rounded-xl text-white border border-white/10 bg-[#1b2028]/50 focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 placeholder:text-white/30 px-5 text-base font-normal transition-all" placeholder="your.name@college.edu" required="" type="email"/>
+</label>
+</div>
+<div class="flex flex-col gap-2">
+<label class="flex flex-col w-full">
+<div class="flex justify-between items-center pb-2 ml-1">
+<p class="text-white/90 text-sm font-medium">Password</p>
+<a class="text-xs text-primary/80 hover:text-primary transition-colors" href="#">Forgot?</a>
+</div>
+<div class="relative flex items-stretch">
+<input class="form-input w-full rounded-xl text-white border border-white/10 bg-[#1b2028]/50 focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 placeholder:text-white/30 px-5 text-base font-normal transition-all" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</label>
+</div>
+<!-- Login Button -->
+<div class="pt-4">
+<button class="w-full h-14 flex items-center justify-center rounded-xl bg-primary hover:bg-primary/90 text-background-dark text-lg font-bold transition-all shadow-lg shadow-primary/20">
+<span>Oi! Get Me In</span>
+</button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<p class="text-white/60 text-sm">
+                        New here? 
+                        <a class="text-primary font-bold hover:underline ml-1" href="#">Join the crew</a>
+</p>
+</div>
+</div>
+<!-- Subtle Background Element -->
+<div class="mt-12 flex items-center gap-2 opacity-30 select-none">
+<span class="material-symbols-outlined text-sm">lock</span>
+<p class="text-xs uppercase tracking-widest font-bold">Secure Campus Access</p>
+</div>
+</main>
+<!-- Image placeholder for branding/visual interest -->
+<div class="fixed bottom-0 left-0 w-full h-1/4 pointer-events-none opacity-20 z-[-1] overflow-hidden">
+<div class="w-full h-full bg-gradient-to-t from-primary/20 to-transparent"></div>
+</div>
+</div>
+</body></html>

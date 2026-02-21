@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oi! Lend Me - Social Proof</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#519dfb",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(81, 157, 251, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col items-center justify-center">
+<div class="layout-container flex w-full flex-col">
+<div class="flex flex-1 justify-center py-10 px-4 md:px-10 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<!-- Section Header -->
+<div class="flex flex-col items-center text-center pb-8 pt-5">
+<span class="text-primary text-sm font-bold uppercase tracking-widest mb-2">Community</span>
+<h2 class="text-[#111418] dark:text-white text-3xl md:text-4xl font-extrabold leading-tight tracking-[-0.015em] px-4">
+                        What the Crew Says
+                    </h2>
+<p class="text-[#637588] dark:text-[#9ba9bb] text-lg mt-4 max-w-2xl">
+                        Real stories from students making the most of campus sharing.
+                    </p>
+</div>
+<!-- Testimonial Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+<!-- Card 1 -->
+<div class="glass-card flex flex-1 flex-col justify-between gap-6 rounded-xl p-8 shadow-sm">
+<div class="flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">format_quote</span>
+<p class="text-[#111418] dark:text-[#e0e0e0] text-lg font-medium leading-relaxed">
+                                "Borrowed a DSLR for my photography class and saved over $800. The process was insanely fast and secure."
+                            </p>
+</div>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-gray-200 dark:border-gray-800/50">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 shrink-0 border-2 border-primary/20" data-alt="Portrait of Alex, a college student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAA2Lc6G2CNxgLLHn47hAeQw-JQPvUpL1LJpBlVcIZq7Lud4suG3UqyU-LGZqT-_xiJXU3XV8Nfo54Uhi1PKOKPbapwX1RYELART8r0cCQJJw_-oRpk7XlzxmFg_X3Foxb1VUe6hQMZGWIUIgALAfd9CjoPlgOefT73RZX0ReodTgsfLocW5unHL48W0dl0N9MCZQZN4zgaq886ymxXwkXM0IA7gl6MTz2yMqU1tJfm2r5EqEhaYWo8GGto2cUuJMskWma1NJjdtZ_3");'>
+</div>
+<div class="flex flex-col">
+<h3 class="text-[#111418] dark:text-white text-base font-bold leading-tight">Alex</h3>
+<p class="text-[#637588] dark:text-[#9ba9bb] text-sm font-normal">Sophomore</p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card flex flex-1 flex-col justify-between gap-6 rounded-xl p-8 shadow-sm">
+<div class="flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">format_quote</span>
+<p class="text-[#111418] dark:text-[#e0e0e0] text-lg font-medium leading-relaxed">
+                                "Lent my air fryer 10 times this semester with zero issues. It's basically paying for my coffee habit now."
+                            </p>
+</div>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-gray-200 dark:border-gray-800/50">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 shrink-0 border-2 border-primary/20" data-alt="Portrait of Sarah, a college student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBp8_GQabyT7SO1uzs13_zC9wFkjvHfRD6vHl5LxhqYZfrf3J-LzkQlGdiuPuuxaHok0OwzfIQgEGRyXIuVyLiIP4q5_N_-i04IXCYuLc5PGKZbv0nCnQ1PTSnKarMA_0lEbkJcTjq1RLeABkfGCIXrbG9dQRnbymyZxJfY2ZLBEwpbiIucGasRf7XQYTylK-9NGMduUQEeTm0qjoEC7RK2zbpQ0A7Q4X4U6e3qtS7fJGKuaJ4MFE7Mum7AcNWiAErVgtQfu0fHIBln");'>
+</div>
+<div class="flex flex-col">
+<h3 class="text-[#111418] dark:text-white text-base font-bold leading-tight">Sarah</h3>
+<p class="text-[#637588] dark:text-[#9ba9bb] text-sm font-normal">Senior</p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card flex flex-1 flex-col justify-between gap-6 rounded-xl p-8 shadow-sm">
+<div class="flex flex-col gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">format_quote</span>
+<p class="text-[#111418] dark:text-[#e0e0e0] text-lg font-medium leading-relaxed">
+                                "Found a camping tent in 5 minutes for a weekend trip. Why buy when you can just borrow from a neighbor?"
+                            </p>
+</div>
+<div class="flex items-center gap-4 mt-auto pt-4 border-t border-gray-200 dark:border-gray-800/50">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 shrink-0 border-2 border-primary/20" data-alt="Portrait of Jordan, a college student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIobzy-FAHMTvSy0ObOU_c7qUYPJVHnWQWpLMKvGZT97jwGki60ZZiyrzZdmU4c34aeJM7Ag1Up4uDBvrbpT_DrNtLfF9kcvR2HbiSA0svtCJaZmFqjkTvUFTrXSXyCbuZcq137XHf4CFHsU7KSrqOIt23t4SxOJyJ600DzCGcBmq_cXQOOU3vNk8a0KPic62vRLAPRS9koUB_fjvg5hMGcBtO8I3PwEDXjFeIG2fww81Ic0416VC1Ay0dLwPphXgmIeMEczwieu55");'>
+</div>
+<div class="flex flex-col">
+<h3 class="text-[#111418] dark:text-white text-base font-bold leading-tight">Jordan</h3>
+<p class="text-[#637588] dark:text-[#9ba9bb] text-sm font-normal">Junior</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
