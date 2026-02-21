@@ -66,28 +66,27 @@ export function HeroSection({ userCount = 500, sampleUsers = [] }: HeroSectionPr
           <Logo width={56} height={56} className="transition-transform group-hover:scale-110 duration-300" />
           <h2 className="text-xl font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">Oi! Lend Me</h2>
         </div>
-        <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
-          <div className="flex items-center gap-6">
+        <div className="flex flex-1 justify-end gap-3 sm:gap-8 items-center">
+          <div className="hidden lg:flex items-center gap-6">
             {[
-              { name: "Start Saving", href: "#why-borrow" },
-              { name: "The Problem", href: "#the-problem" },
+              { name: "Why Borrow?", href: "#the-problem" },
               { name: "What You Get", href: "#what-you-get" },
-              { name: "Students Love Us", href: "#students-love-us" },
               { name: "How It Works", href: "#how-it-works" },
-              { name: "Get Started", href: "#get-started" },
-              { name: "About", href: "#about" },
+              { name: "Wall of Love", href: "#students-love-us" },
             ].map((item) => (
                 <Link key={item.name} className="text-sm font-medium text-slate-400 hover:text-[#4F9DFF] transition-colors relative group" href={item.href}>
                     {item.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#4F9DFF] group-hover:w-full transition-all duration-300"></span>
                 </Link>
             ))}
-            <button onClick={() => handleAuthNavigation('/auth/login')} className="px-5 py-2 rounded-full border border-slate-700/50 text-slate-400 text-sm font-medium hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300">Log In</button>
           </div>
-          <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-10 px-6 bg-[#4F9DFF] text-white text-sm font-bold shadow-[0_0_20px_rgba(79,157,255,0.3)] hover:shadow-[0_0_30px_rgba(79,157,255,0.5)] transition-all duration-300 transform hover:scale-105">
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span className="relative">Borrow Smarter</span>
-          </button>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <button onClick={() => handleAuthNavigation('/auth/login')} className="hidden sm:block px-5 py-2 rounded-full border border-slate-700/50 text-slate-400 text-sm font-medium hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300">Log In</button>
+            <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-9 sm:h-10 px-4 sm:px-6 bg-[#4F9DFF] text-white text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(79,157,255,0.3)] hover:shadow-[0_0_30px_rgba(79,157,255,0.5)] transition-all duration-300 transform hover:scale-105">
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative">Borrow Smarter</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -98,13 +97,13 @@ export function HeroSection({ userCount = 500, sampleUsers = [] }: HeroSectionPr
                 
                 {/* Left Content */}
                 <div className="flex flex-col gap-8 lg:w-1/2 text-center lg:text-left z-20">
-                    <FadeUp delay={0.1}>
-                         <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#4F9DFF] text-xs font-bold tracking-widest uppercase mb-4 shadow-[0_0_10px_rgba(79,157,255,0.2)]">
+                    <FadeUp delay={0.1} className="w-full">
+                         <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#4F9DFF] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-4 shadow-[0_0_10px_rgba(79,157,255,0.2)]">
                             Campus Sharing Reimagined
                         </span>
-                        <h1 className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tighter text-white">
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tighter text-white break-words">
                         Stop Buying.<br/>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F9DFF] to-indigo-400 animate-gradient">Start Borrowing.</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F9DFF] to-indigo-400 animate-gradient block mt-1">Start Borrowing.</span>
                         </h1>
                     </FadeUp>
                     
@@ -115,10 +114,10 @@ export function HeroSection({ userCount = 500, sampleUsers = [] }: HeroSectionPr
                         </p>
                     </FadeUp>
 
-                    <FadeUp delay={0.3} className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start pt-4">
-                        <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-14 px-8 bg-[#4F9DFF] text-white text-lg font-bold shadow-[0_0_25px_rgba(79,157,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(79,157,255,0.6)]">
+                    <FadeUp delay={0.3} className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start pt-4 w-full">
+                        <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-14 px-8 bg-[#4F9DFF] text-white text-lg font-bold shadow-[0_0_25px_rgba(79,157,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(79,157,255,0.6)] w-full sm:w-auto">
                             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                            <span className="relative flex items-center gap-2">
+                            <span className="relative flex items-center justify-center gap-2">
                                 Borrow Smarter <span className="text-xl">→</span>
                             </span>
                         </button>

@@ -350,7 +350,7 @@ function LendItemForm() {
                     className="relative"
                 >
                     <Card className="bg-[#121726]/60 backdrop-blur-[32px] border-white/10 rounded-[3rem] shadow-2xl overflow-hidden min-h-[500px] flex flex-col">
-                    <CardContent className="p-10 flex-grow">
+                    <CardContent className="p-6 sm:p-10 flex-grow">
                         <AnimatePresence mode="wait" custom={direction}>
                         <motion.div 
                             key={step}
@@ -478,7 +478,7 @@ function LendItemForm() {
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleChange("ownerType", "personal")}
                                             className={cn(
-                                                "relative p-8 rounded-[2.5rem] border text-left transition-all overflow-hidden group/btn",
+                                                "relative p-6 sm:p-8 rounded-[2.5rem] border text-left transition-all overflow-hidden group/btn",
                                                 formData.ownerType === 'personal' ? 'bg-blue-600/10 border-blue-500 shadow-2xl shadow-blue-500/10' : 'bg-white/5 border-white/5 hover:border-white/10'
                                             )}
                                         >
@@ -499,7 +499,7 @@ function LendItemForm() {
                                             whileTap={{ scale: 0.98 }}
                                             onClick={() => handleChange("ownerType", "group")}
                                             className={cn(
-                                                "relative p-8 rounded-[2.5rem] border text-left transition-all overflow-hidden group/btn",
+                                                "relative p-6 sm:p-8 rounded-[2.5rem] border text-left transition-all overflow-hidden group/btn",
                                                 formData.ownerType === 'group' ? 'bg-blue-600/10 border-blue-500 shadow-2xl shadow-blue-500/10' : 'bg-white/5 border-white/5 hover:border-white/10'
                                             )}
                                         >
@@ -574,7 +574,7 @@ function LendItemForm() {
                                         </div>
                                     </div>
 
-                                    <div className="p-8 rounded-[2rem] bg-white/5 border border-white/5 flex items-center justify-between group">
+                                    <div className="p-6 sm:p-8 rounded-[2rem] bg-white/5 border border-white/5 flex items-center justify-between group">
                                         <div>
                                             <h4 className="text-white font-bold mb-1">Immediate Availability</h4>
                                             <p className="text-sm text-gray-500 font-medium">Allow requests as soon as you list.</p>
@@ -604,7 +604,7 @@ function LendItemForm() {
                                     <motion.div 
                                         initial={{ scale: 0.9, opacity: 0 }}
                                         animate={{ scale: 1, opacity: 1 }}
-                                        className="bg-blue-600/10 border border-blue-500/20 p-8 rounded-[2rem] flex gap-6"
+                                        className="bg-blue-600/10 border border-blue-500/20 p-6 sm:p-8 rounded-[2rem] flex gap-4 sm:gap-6"
                                     >
                                         <div className="size-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xl">
                                             <ShieldCheck size={28} />
@@ -655,7 +655,7 @@ function LendItemForm() {
                     </CardContent>
 
                     {/* Footer Actions */}
-                    <div className="p-8 pt-0 flex justify-between items-center bg-transparent">
+                    <div className="p-6 sm:p-8 pt-0 sm:pt-0 flex justify-between items-center bg-transparent">
                         <AnimatePresence>
                             {step > 1 && (
                                 <motion.div
@@ -688,7 +688,7 @@ function LendItemForm() {
                             <Button 
                                 onClick={handleSubmit} 
                                 disabled={loading} 
-                                className="h-16 px-12 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-blue-500/40 hover:scale-[1.02] active:scale-95 transition-all min-w-[200px]"
+                                className="h-16 px-6 sm:px-12 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-blue-500/40 hover:scale-[1.02] active:scale-95 transition-all min-w-[200px]"
                             >
                                 {loading ? (
                                     <Loader2 className="size-6 animate-spin" />

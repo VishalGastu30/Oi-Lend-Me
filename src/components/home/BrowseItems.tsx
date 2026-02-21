@@ -247,6 +247,26 @@ export function BrowseItems() {
             )}
           </div>
 
+          {/* Mobile Categories (Hidden on lg) */}
+          <div className="lg:hidden w-full overflow-x-auto no-scrollbar pb-2 -mx-6 px-6 sm:mx-0 sm:px-0">
+             <div className="flex gap-2 w-max">
+                {["All Items", "Electronics", "Lab", "Class", "Books", "Chargers", "Misc"].map((cat) => (
+                   <button
+                      key={cat}
+                      onClick={() => { setCategory(cat); setPage(1); }}
+                      className={cn(
+                         "px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all",
+                         category === cat
+                            ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                            : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5"
+                      )}
+                   >
+                      {cat}
+                   </button>
+                ))}
+             </div>
+          </div>
+
           {/* Grid */}
           <AnimatePresence mode="popLayout">
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">

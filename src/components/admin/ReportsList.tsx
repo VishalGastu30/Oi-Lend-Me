@@ -95,12 +95,12 @@ export function ReportsList({ reports, currentFilter }: ReportsListProps) {
   return (
     <div className="space-y-6">
       <Tabs defaultValue={currentFilter} onValueChange={handleFilterChange} className="w-full">
-        <TabsList className="bg-[#0B0F1A] border border-white/5 p-1 mb-6">
-          <TabsTrigger value="ALL" className="data-[state=active]:bg-white/10 data-[state=active]:text-white">All Reports</TabsTrigger>
-          <TabsTrigger value="PENDING" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">Pending</TabsTrigger>
-          <TabsTrigger value="REVIEWED" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400">Reviewed</TabsTrigger>
-          <TabsTrigger value="ACTION_TAKEN" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">Resolved</TabsTrigger>
-          <TabsTrigger value="DISMISSED" className="data-[state=active]:bg-gray-500/20 data-[state=active]:text-gray-400">Dismissed</TabsTrigger>
+        <TabsList className="bg-[#0B0F1A] border border-white/5 p-1 mb-6 w-full justify-start overflow-x-auto flex-nowrap md:flex-wrap no-scrollbar">
+          <TabsTrigger value="ALL" className="data-[state=active]:bg-white/10 data-[state=active]:text-white whitespace-nowrap">All Reports</TabsTrigger>
+          <TabsTrigger value="PENDING" className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400 whitespace-nowrap">Pending</TabsTrigger>
+          <TabsTrigger value="REVIEWED" className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-400 whitespace-nowrap">Reviewed</TabsTrigger>
+          <TabsTrigger value="ACTION_TAKEN" className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400 whitespace-nowrap">Resolved</TabsTrigger>
+          <TabsTrigger value="DISMISSED" className="data-[state=active]:bg-gray-500/20 data-[state=active]:text-gray-400 whitespace-nowrap">Dismissed</TabsTrigger>
         </TabsList>
       </Tabs>
 

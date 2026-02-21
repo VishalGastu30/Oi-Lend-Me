@@ -153,7 +153,7 @@ export function Navbar() {
                                 />
                             </motion.div>
                         </Link>
-                        <div className="md:hidden">
+                        <div className="lg:hidden">
                             <motion.button
                               whileTap={{ scale: 0.9 }}
                               onClick={() => setIsOpen(!isOpen)}
@@ -202,27 +202,50 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu Sidebar & Backdrop */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] lg:hidden"
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0B0F1A]/95 backdrop-blur-2xl border-t border-white/5 absolute w-full left-0 top-20 overflow-hidden shadow-2xl z-[90]"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+            className="fixed top-0 right-0 h-[100dvh] w-[85vw] max-w-[320px] bg-[#0B0F1A] border-l border-white/10 z-[100] p-6 lg:hidden shadow-2xl flex flex-col overflow-y-auto no-scrollbar"
           >
-            <div className="px-6 py-8 space-y-4">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-xl font-bold text-white tracking-tight">Menu</h2>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-gray-400 hover:text-white bg-white/5 rounded-xl transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 space-y-2">
               {navItems.map((item, idx) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}
                 >
                     <Link
                       href={item.href}
                       className={cn(
-                        "block px-4 py-4 rounded-2xl text-lg font-bold transition-all",
+                        "block px-4 py-3.5 rounded-2xl text-base font-semibold transition-all mb-1",
                          isActive(item.href)
                             ? "text-blue-400 bg-blue-500/10 border border-blue-500/20"
                             : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -233,54 +256,54 @@ export function Navbar() {
                     </Link>
                 </motion.div>
               ))}
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="pt-6 border-t border-white/5 flex flex-col gap-4"
-              >
-                {!isAdminView && user && (
-                  <button
-                    onClick={() => {
-                      setFeedbackOpen(true);
-                      setIsOpen(false);
-                    }}
-                    className="flex items-center gap-3 px-4 py-4 rounded-2xl text-gray-400 hover:text-white hover:bg-white/5 font-bold transition-all"
-                  >
-                    <MessageCircle size={20} className="text-blue-500" />
-                    <span>Send Feedback</span>
-                  </button>
-                )}
-                
-                {user ? (
-                  <button onClick={async () => {
-                     try {
-                        await fetch('/api/auth/logout', { 
-                          method: 'POST',
-                          keepalive: true 
-                        });
-                     } catch (error) {
-                        console.error("Logout failed", error);
-                     } finally {
-                        setUser(null);
-                        window.location.href = "/";
-                     }
-                  }} className="block w-full text-left bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-4 rounded-2xl font-bold hover:bg-red-500 hover:text-white transition-all">
-                    Log Out
-                  </button>
-                ) : (
-                  <div className="flex flex-col gap-3">
-                    <Link href="/auth/login" onClick={() => setIsOpen(false)}>
-                      <Button variant="outline" className="w-full h-14 rounded-2xl border-white/10 font-bold">Log In</Button>
-                    </Link>
-                    <Link href="/auth/signup" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full h-14 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold shadow-lg shadow-blue-500/25">Sign Up</Button>
-                    </Link>
-                  </div>
-                )}
-              </motion.div>
             </div>
+              
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="pt-6 border-t border-white/10 flex flex-col gap-3 mt-6"
+            >
+              {!isAdminView && user && (
+                <button
+                  onClick={() => {
+                    setFeedbackOpen(true);
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-3 w-full px-4 py-3.5 rounded-2xl text-gray-300 bg-white/5 hover:bg-white/10 border border-white/10 font-bold transition-all"
+                >
+                  <MessageCircle size={18} className="text-blue-400" />
+                  <span>Send Feedback</span>
+                </button>
+              )}
+              
+              {user ? (
+                <button onClick={async () => {
+                   try {
+                      await fetch('/api/auth/logout', { 
+                        method: 'POST',
+                        keepalive: true 
+                      });
+                   } catch (error) {
+                      console.error("Logout failed", error);
+                   } finally {
+                      setUser(null);
+                      window.location.href = "/";
+                   }
+                }} className="flex items-center justify-center w-full bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-3.5 rounded-2xl font-bold hover:bg-red-500 hover:text-white transition-all">
+                  Log Out
+                </button>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  <Link href="/auth/login" onClick={() => setIsOpen(false)}>
+                    <Button variant="outline" className="w-full h-12 rounded-2xl border-white/10 font-bold">Log In</Button>
+                  </Link>
+                  <Link href="/auth/signup" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full h-12 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold shadow-lg shadow-blue-500/25">Sign Up</Button>
+                  </Link>
+                </div>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

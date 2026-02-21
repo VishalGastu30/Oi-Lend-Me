@@ -231,10 +231,10 @@ export function FeedbackList({ initialFeedback }: FeedbackListProps) {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="NEW" className="w-full">
-          <TabsList className="bg-white/5 border border-white/10 w-full justify-start h-auto p-1 mb-6">
+          <TabsList className="bg-white/5 border border-white/10 w-full justify-start h-auto p-1 mb-6 overflow-x-auto flex-nowrap md:flex-wrap no-scrollbar">
             <TabsTrigger 
                 value="NEW"
-                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-gray-400 gap-2"
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-gray-400 gap-2 whitespace-nowrap"
             >
                 <Inbox className="w-4 h-4" />
                 Inbox
@@ -244,7 +244,7 @@ export function FeedbackList({ initialFeedback }: FeedbackListProps) {
             </TabsTrigger>
             <TabsTrigger 
                 value="REVIEWED"
-                className="data-[state=active]:bg-yellow-600/20 data-[state=active]:text-yellow-400 text-gray-400 gap-2"
+                className="data-[state=active]:bg-yellow-600/20 data-[state=active]:text-yellow-400 text-gray-400 gap-2 whitespace-nowrap"
             >
                 <CheckCircle2 className="w-4 h-4" />
                 Reviewed
@@ -254,7 +254,7 @@ export function FeedbackList({ initialFeedback }: FeedbackListProps) {
             </TabsTrigger>
              <TabsTrigger 
                 value="RESOLVED"
-                className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400 text-gray-400 gap-2"
+                className="data-[state=active]:bg-green-600/20 data-[state=active]:text-green-400 text-gray-400 gap-2 whitespace-nowrap"
             >
                 <Archive className="w-4 h-4" />
                 Resolved
@@ -264,7 +264,7 @@ export function FeedbackList({ initialFeedback }: FeedbackListProps) {
             </TabsTrigger>
             <TabsTrigger 
                 value="ALL"
-                className="data-[state=active]:bg-white/10 text-gray-400 gap-2 ml-auto"
+                className="data-[state=active]:bg-white/10 text-gray-400 gap-2 ml-auto whitespace-nowrap whitespace-nowrap"
             >
                 All Feedback
             </TabsTrigger>

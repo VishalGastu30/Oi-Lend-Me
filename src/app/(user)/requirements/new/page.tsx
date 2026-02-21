@@ -246,7 +246,7 @@ export default function AskCampusPage() {
           <div className="lg:col-span-8">
             <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="relative">
               <Card className="bg-[#121726]/60 backdrop-blur-[32px] border-white/10 rounded-[3rem] shadow-2xl overflow-hidden min-h-[500px] flex flex-col">
-                <CardContent className="p-10 flex-grow">
+                <CardContent className="p-6 sm:p-10 flex-grow">
                   <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
                       key={step}
@@ -482,7 +482,7 @@ export default function AskCampusPage() {
                 </CardContent>
 
                 {/* Footer Actions */}
-                <div className="p-8 pt-0 flex justify-between items-center">
+                <div className="p-6 sm:p-8 pt-0 sm:pt-0 flex justify-between items-center">
                   <AnimatePresence>
                     {step > 1 && (
                       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }}>
@@ -511,7 +511,7 @@ export default function AskCampusPage() {
                     <Button
                       onClick={handleSubmit}
                       disabled={loading}
-                      className="h-16 px-12 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-blue-500/40 hover:scale-[1.02] active:scale-95 transition-all min-w-[200px]"
+                      className="h-16 px-6 sm:px-12 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-blue-500/40 hover:scale-[1.02] active:scale-95 transition-all min-w-[160px] sm:min-w-[200px]"
                     >
                       {loading ? (
                         <Loader2 className="size-6 animate-spin" />

@@ -34,12 +34,12 @@ export function ConversionSection() {
                 </p>
             </FadeUp>
 
-            <FadeUp delay={0.2} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                 <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-14 px-10 bg-[#4F9DFF] text-white text-lg font-bold shadow-[0_0_40px_rgba(79,157,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(79,157,255,0.6)]">
+            <FadeUp delay={0.2} className="flex flex-col sm:flex-row gap-4 w-full px-6 sm:px-0 justify-center">
+                 <button onClick={() => handleAuthNavigation('/auth/signup')} className="relative group overflow-hidden rounded-full h-14 px-10 bg-[#4F9DFF] text-white text-lg font-bold shadow-[0_0_40px_rgba(79,157,255,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(79,157,255,0.6)] w-full sm:w-auto">
                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></span>
-                     <span className="relative">Start Borrowing Now</span>
+                     <span className="relative text-center block">Start Borrowing Now</span>
                  </button>
-                 <button onClick={() => handleAuthNavigation('/auth/login')} className="h-14 px-10 rounded-full border border-slate-700 text-white text-lg font-bold hover:bg-white/5 transition-colors">
+                 <button onClick={() => handleAuthNavigation('/auth/login')} className="h-14 px-10 rounded-full border border-slate-700 text-white text-lg font-bold hover:bg-white/5 transition-colors w-full sm:w-auto">
                      Log In
                  </button>
             </FadeUp>

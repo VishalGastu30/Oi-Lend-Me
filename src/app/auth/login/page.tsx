@@ -83,7 +83,7 @@ export default function LoginPage() {
               Enter your college email to access the vault.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6 px-8">
+          <CardContent className="space-y-6 px-4 sm:px-8">
             <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300 ml-1">College Email</label>

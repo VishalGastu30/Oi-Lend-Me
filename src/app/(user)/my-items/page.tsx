@@ -190,7 +190,7 @@ export default function MyItemsPage() {
         <h1 className="text-3xl font-bold text-white mb-8">My Items & Activity</h1>
         
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-[#1A2030] border border-white/5 p-1 rounded-xl mb-8 flex flex-wrap h-auto gap-1">
+            <TabsList className="bg-[#1A2030] border border-white/5 p-1 rounded-xl mb-8 flex overflow-x-auto no-scrollbar h-auto gap-1 w-full justify-start items-center">
                 <TabsTrigger value="listings" className="flex-1 min-w-[100px] data-[state=active]:bg-[#4F9DFF] data-[state=active]:text-white rounded-lg py-2.5 transition-all">
                     <List className="w-4 h-4 mr-2" />
                     Listings
@@ -237,7 +237,7 @@ export default function MyItemsPage() {
                  ) : (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          {activeListings.map(item => (
-                             <Card key={item.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden group">
+                             <Card key={item.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden group h-full">
                                  <div className="flex gap-4">
                                      <div className="w-20 h-20 bg-black/40 rounded-lg overflow-hidden shrink-0">
                                          {item.imageUrl && <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />}
@@ -304,7 +304,7 @@ export default function MyItemsPage() {
                  ) : (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          {pending.map(req => (
-                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden">
+                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden h-full">
                                  <div className="flex gap-4">
                                      <div className="w-20 h-20 bg-black/40 rounded-lg overflow-hidden shrink-0">
                                          {req.item.imageUrl && <img src={req.item.imageUrl} alt={req.item.name} className="w-full h-full object-cover" />}
@@ -336,7 +336,7 @@ export default function MyItemsPage() {
                  ) : (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          {borrowed.map(req => (
-                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden">
+                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden h-full">
                                  <div className="flex gap-4">
                                      <div className="w-20 h-20 bg-black/40 rounded-lg overflow-hidden shrink-0">
                                          {req.item.imageUrl && <img src={req.item.imageUrl} alt={req.item.name} className="w-full h-full object-cover" />}
@@ -366,7 +366,7 @@ export default function MyItemsPage() {
                  ) : (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          {lent.map(req => (
-                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden">
+                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white overflow-hidden h-full">
                                 <div className="flex gap-4">
                                      <div className="w-20 h-20 bg-black/40 rounded-lg overflow-hidden shrink-0">
                                          {req.item.imageUrl && <img src={req.item.imageUrl} alt={req.item.name} className="w-full h-full object-cover" />}
@@ -445,7 +445,7 @@ export default function MyItemsPage() {
                  ) : (
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                          {returned.map(req => (
-                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white opacity-70 hover:opacity-100 transition-opacity">
+                             <Card key={req.id} className="p-4 bg-[#1A2030] border-white/10 text-white opacity-70 hover:opacity-100 transition-opacity h-full">
                                  <div className="flex gap-4">
                                      <div className="w-20 h-20 bg-black/40 rounded-lg overflow-hidden shrink-0 grayscale">
                                          {req.item.imageUrl && <img src={req.item.imageUrl} alt={req.item.name} className="w-full h-full object-cover" />}

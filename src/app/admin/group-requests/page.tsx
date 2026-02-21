@@ -186,11 +186,11 @@ export default function GroupRequestsPage() {
       </div>
 
       <Tabs defaultValue="PENDING" className="w-full" onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4 max-w-2xl bg-white/5 border border-white/10">
-          <TabsTrigger value="PENDING" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-white/60">Pending</TabsTrigger>
-          <TabsTrigger value="APPROVED" className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white text-white/60">Approved</TabsTrigger>
-          <TabsTrigger value="NEEDS_EDIT" className="data-[state=active]:bg-orange-600 data-[state=active]:text-white text-white/60">Sent Back</TabsTrigger>
-          <TabsTrigger value="REJECTED" className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-white/60">Rejected</TabsTrigger>
+        <TabsList className="flex w-full overflow-x-auto no-scrollbar justify-start max-w-2xl bg-white/5 border border-white/10 p-1">
+          <TabsTrigger value="PENDING" className="flex-1 whitespace-nowrap data-[state=active]:bg-blue-600 data-[state=active]:text-white text-white/60">Pending</TabsTrigger>
+          <TabsTrigger value="APPROVED" className="flex-1 whitespace-nowrap data-[state=active]:bg-emerald-600 data-[state=active]:text-white text-white/60">Approved</TabsTrigger>
+          <TabsTrigger value="NEEDS_EDIT" className="flex-1 whitespace-nowrap data-[state=active]:bg-orange-600 data-[state=active]:text-white text-white/60">Sent Back</TabsTrigger>
+          <TabsTrigger value="REJECTED" className="flex-1 whitespace-nowrap data-[state=active]:bg-red-600 data-[state=active]:text-white text-white/60">Rejected</TabsTrigger>
         </TabsList>
 
         <AnimatePresence mode="wait">

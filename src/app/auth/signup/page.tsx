@@ -120,7 +120,7 @@ export default function SignupPage() {
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-6 px-10">
+          <CardContent className="space-y-6 px-4 sm:px-10">
             <form onSubmit={handleSignup} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Name */}
