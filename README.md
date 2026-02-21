@@ -96,3 +96,5 @@ The Admin Dashboard provides global command-and-control over the platform.
 
 - Currently, file uploads are handled via local storage in development. For production deployment (e.g., Vercel), an S3-compatible cloud storage block is recommended.
 - Real-time chat natively uses short-polling; this is sufficient for scale under 1,000 active concurrent users but might require WebSocket adoption (e.g., via Pusher/Supabase) at larger volumes.
+# Oi-Lend-Me
+# Oi-Lend-Me
