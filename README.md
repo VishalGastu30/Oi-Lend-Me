@@ -89,8 +89,8 @@ The Admin Dashboard provides global command-and-control over the platform.
 
 > ⚠️ For development/testing only. Do NOT use in production.
 
-- **Email**: admin@admin.com
-- **Password**: admin123
+- **Email**: valiantvishal30@gmail.com
+- **Password**: IamAdmin@3004
 
 ## 10. Known Limitations / Notes
 
