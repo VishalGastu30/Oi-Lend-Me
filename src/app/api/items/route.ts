@@ -6,6 +6,8 @@ import { ItemCategory, ItemStatus } from '@prisma/client';
 import { promises as fs } from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { ItemService } from '@/services/ItemService';
+import { logger } from '@/lib/logger';
 
 // Schema for creating an item
 const createItemSchema = z.object({
@@ -122,7 +124,7 @@ export async function GET(request: Request) {
       },
     });
   } catch (e) {
-    console.error('Get Items error:', e);
+    logger.error({ error: e }, 'Get Items error');
     return errorResponse('Internal server error', 500);
   }
 }
@@ -173,84 +175,55 @@ export async function POST(request: Request) {
     }
     const validatedData = parsed.data;
 
-    // Transaction to create item and images
-    const newItem = await prisma.$transaction(async (tx) => {
-      const item = await tx.item.create({
-        data: {
-          ...validatedData,
-          ownerId: session.userId,
-          status: 'AVAILABLE',
-          imageUrl: null, // Will be updated if images are uploaded
-        },
-      });
+    // Pre-generate Item ID so we can save files before the DB transaction
+    const itemId = crypto.randomUUID();
+    const imageRecords: Array<{ itemId: string; url: string; orderIndex: number; isPrimary: boolean }> = [];
+    let mainImageUrl = itemData.imageUrl || null;
 
-      if (files.length > 0) {
-        const uploadDir = path.join(process.cwd(), 'storage/item-images', item.id);
-        await fs.mkdir(uploadDir, { recursive: true });
+    if (files.length > 0) {
+      const uploadDir = path.join(process.cwd(), 'storage/item-images', itemId);
+      await fs.mkdir(uploadDir, { recursive: true });
 
-        const imageRecords = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const nameParts = file.name.split('.');
+        const ext = nameParts.length > 1 ? `.${nameParts.pop()}` : '.jpg';
+        const fileName = `${crypto.randomUUID()}${ext}`;
+        const filePath = path.join(uploadDir, fileName);
+        
+        // File I/O done BEFORE taking out a database connection
+        await fs.writeFile(filePath, buffer);
 
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          const buffer = Buffer.from(await file.arrayBuffer());
-          // Simple extension extraction or default to bin/jpg
-          const nameParts = file.name.split('.');
-          const ext = nameParts.length > 1 ? `.${nameParts.pop()}` : '.jpg';
-          const fileName = `${crypto.randomUUID()}${ext}`;
-          const filePath = path.join(uploadDir, fileName);
-          
-          await fs.writeFile(filePath, buffer);
+        const fileUrl = `/storage/item-images/${itemId}/${fileName}`;
 
-          const publicUrl = `/api/storage/item-images/${item.id}/${fileName}`; // Assuming storage route is /api/storage or similar. 
-          // Wait, previous storage route was /storage/[...path] which maps to src/app/storage/[...path]/route.ts
-          // But Next.js App Router route hierarchy: src/app/storage/[...path]/route.ts -> /storage/... 
-          // So URL should be /storage/item-images/${item.id}/${fileName}
-
-          const fileUrl = `/storage/item-images/${item.id}/${fileName}`;
-
-          imageRecords.push({
-            itemId: item.id,
-            url: fileUrl,
-            orderIndex: i,
-            isPrimary: i === 0,
-          });
-        }
-
-        if (imageRecords.length > 0) {
-            await tx.itemImage.createMany({ data: imageRecords });
-            
-            // Update item with primary image URL for easy access
-            await tx.item.update({
-                where: { id: item.id },
-                data: { imageUrl: imageRecords[0].url }
-            });
-            item.imageUrl = imageRecords[0].url; // Update local object for response
-        }
-      } else if (itemData.imageUrl) {
-          // If JSON had imageUrl (legacy placeholder), keep it? 
-          // User requirement: "Default images should be used ONLY IF User uploads zero images"
-          // If User uploads nothing, we might want to assign a default based on category, 
-          // BUT the prompt says "Automatically assigns default images... This is a BLOCKER".
-          // It also says "Default images should be used ONLY IF User uploads zero images".
-          // So if NO files, we can fallback to a placeholder if we want, or just leave it null.
-          // The current code passes a placeholder in JSON content. 
-          // If we are in Multipart mode and no files, we have no images.
-          // We can assign a default here if we want.
-          // Let's leave it null or generic default so the UI handles it or we assign a static default.
-           const defaultImage = "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&q=80";
-           await tx.item.update({
-                where: { id: item.id },
-                data: { imageUrl: defaultImage }
-           });
-           item.imageUrl = defaultImage;
+        imageRecords.push({
+          itemId: itemId,
+          url: fileUrl,
+          orderIndex: i,
+          isPrimary: i === 0,
+        });
       }
 
-      return item;
-    });
+      if (imageRecords.length > 0) {
+        mainImageUrl = imageRecords[0].url;
+      }
+    } else if (!mainImageUrl) {
+        mainImageUrl = "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&q=80";
+    }
+
+    // Now securely run the ultra-fast Database Transaction
+    const newItem = await ItemService.createItem(
+      itemId,
+      validatedData,
+      session.userId,
+      mainImageUrl,
+      imageRecords
+    );
 
     return successResponse(newItem, 201);
   } catch (e) {
-    console.error('Create Item error:', e);
+    logger.error({ error: e }, 'Create Item error');
     return errorResponse('Internal server error', 500);
   }
 }

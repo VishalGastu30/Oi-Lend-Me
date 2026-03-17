@@ -60,23 +60,30 @@ export async function getAdminAnalytics() {
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-  const [users, items] = await Promise.all([
-      prisma.user.findMany({
-          where: { createdAt: { gte: thirtyDaysAgo } },
-          select: { createdAt: true }
-      }),
-      prisma.item.findMany({
-          where: { createdAt: { gte: thirtyDaysAgo } },
-          select: { createdAt: true }
-      })
+  const [usersRaw, itemsRaw] = await Promise.all([
+      prisma.$queryRaw<{ date: Date; count: bigint }[]>`
+        SELECT date_trunc('day', created_at) as date, COUNT(*)::bigint as count
+        FROM users 
+        WHERE created_at >= ${thirtyDaysAgo} 
+        GROUP BY date_trunc('day', created_at)
+      `,
+      prisma.$queryRaw<{ date: Date; count: bigint }[]>`
+        SELECT date_trunc('day', created_at) as date, COUNT(*)::bigint as count
+        FROM items 
+        WHERE created_at >= ${thirtyDaysAgo} 
+        GROUP BY date_trunc('day', created_at)
+      `
   ]);
+
+  const userCounts = Object.fromEntries(usersRaw.map(r => [r.date.toISOString().split('T')[0], Number(r.count)]));
+  const itemCounts = Object.fromEntries(itemsRaw.map(r => [r.date.toISOString().split('T')[0], Number(r.count)]));
 
   // Aggregate by date
   const data = dates.map(date => {
       return {
           date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-          users: users.filter(u => u.createdAt.toISOString().split('T')[0] === date).length,
-          items: items.filter(i => i.createdAt.toISOString().split('T')[0] === date).length
+          users: userCounts[date] || 0,
+          items: itemCounts[date] || 0
       };
   });
 
@@ -102,7 +109,8 @@ export async function getReports(filter: 'ALL' | 'PENDING' | 'REVIEWED' | 'ACTIO
     },
     orderBy: {
       createdAt: 'desc'
-    }
+    },
+    take: 100 // Prevent unbounded list crash
   });
 }
 
@@ -134,7 +142,8 @@ export async function getFeedback(status?: FeedbackStatus) {
     },
     orderBy: {
       createdAt: 'desc'
-    }
+    },
+    take: 100
   });
 }
 
@@ -336,26 +345,26 @@ export async function performModerationAction(data: {
         const banEnd = new Date();
         banEnd.setDate(banEnd.getDate() + 7);
 
-        // 3. For each member: 7-day suspension + notification
-        for (const member of members) {
-            // 7-day suspension
-            await prisma.userSuspension.create({
-                data: {
+        // 3. For all members: batch insert 7-day suspensions + notifications
+        if (members.length > 0) {
+            // Batch 7-day suspension
+            await prisma.userSuspension.createMany({
+                data: members.map(member => ({
                     userId: member.userId,
                     adminId: admin.userId,
                     reason: `You were a member of a group that violated platform rules. Group "${groupName}" was permanently banned. Reason: ${reason}`,
                     endAt: banEnd,
-                }
+                }))
             });
 
-            // Notification
-            await prisma.notification.create({
-                data: {
+            // Batch Notification
+            await prisma.notification.createMany({
+                data: members.map(member => ({
                     userId: member.userId,
                     type: 'SYSTEM',
                     message: `The group "${groupName}" has been permanently banned. Reason: ${reason}. Your account has been restricted for 7 days.`,
                     resourcePath: '/home',
-                }
+                }))
             });
         }
     }

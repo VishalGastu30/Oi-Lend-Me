@@ -17,21 +17,31 @@ const typingSchema = z.object({
 // but that won't work across workers.
 // Given the constraints, let's use the Conversation table.
 
+import { rateLimit } from '@/lib/rate-limiter';
+import { logger } from '@/lib/logger';
+
 export async function POST(request: Request) {
   try {
     const session = await getSession(request);
     if (!session) return unauthorizedResponse();
 
+    const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const limitResult = rateLimit(ip, 30, 60 * 1000); // 30 requests per minute
+    if (!limitResult.success) {
+       logger.warn({ ip, userId: session.userId }, 'Typing route rate limited');
+       return errorResponse('Too many typing events', 429);
+    }
+
     const { data, error } = await parseBody(request, typingSchema);
     if (error || !data) return errorResponse('Invalid input', 400);
 
-    // In a real app, this would be WebSockets. 
-    // Here we'll just mock the response for the frontend to "see" others typing 
-    // if we had a way to broadcast. 
-    // Since we don't, we'll just return success.
+    // In a real app, this would use WebSockets or Supabase Realtime. 
+    // Edge architecture limitation: Memory is scoped to isolates, so we can't share state seamlessly.
+    // For now, we mock success to prevent errors while saving DB calls.
     
     return successResponse({ success: true });
   } catch (e) {
+    logger.error({ error: e }, 'Typing request error');
     return errorResponse('Internal error', 500);
   }
 }

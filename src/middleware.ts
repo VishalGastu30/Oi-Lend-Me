@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { verifyJWT } from '@/lib/auth-edge';
+import { rateLimit } from '@/lib/rate-limiter';
 
 // Public paths that don't require authentication
 const PUBLIC_PATHS = ['/'];
@@ -17,6 +18,15 @@ export async function middleware(request: NextRequest) {
     pathname.includes('.') // images, etc.
   ) {
     return NextResponse.next();
+  }
+
+  // Rate Limiting for auth endpoints to prevent brute-force attacks
+  if (pathname.startsWith('/api/auth')) {
+    const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const limitResult = rateLimit(ip, 10, 5 * 60 * 1000); // 10 requests per 5 minutes per IP
+    if (!limitResult.success) {
+       return NextResponse.json({ error: 'Too many requests, please slow down.' }, { status: 429 });
+    }
   }
 
   // 2. Check Authentication

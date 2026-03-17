@@ -1,0 +1,48 @@
+rules:
+  # SQL Injection
+  - id: sql-injection-raw-query
+    patterns:
+      - pattern: prisma.$executeRawUnsafe($QUERY)
+      - metavariable-regex:
+          metavariable: $QUERY
+          regex: ".*\\$\\{.*\\}.*"
+    message: Potential SQL injection via $executeRawUnsafe with string interpolation
+    severity: ERROR
+    languages: [typescript, javascript]
+
+  # Hardcoded Secrets
+  - id: hardcoded-secret
+    pattern: |
+      password = "..."
+    message: Hardcoded password detected
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # XSS via dangerouslySetInnerHTML
+  - id: react-dangerouslysetinnerhtml
+    pattern: dangerouslySetInnerHTML={...}
+    message: Use of dangerouslySetInnerHTML — ensure input is sanitized
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # Insecure cookie
+  - id: insecure-cookie-no-httponly
+    patterns:
+      - pattern: |
+          response.cookies.set($NAME, $VALUE, { ..., httpOnly: false, ... })
+    message: Cookie set without httpOnly flag
+    severity: WARNING
+    languages: [typescript, javascript]
+
+  # Console.log in production code
+  - id: no-console-log
+    pattern: console.log(...)
+    message: Remove console.log before production
+    severity: INFO
+    languages: [typescript, javascript]
+    paths:
+      include:
+        - src/
+      exclude:
+        - src/**/*.test.*
+        - tests/

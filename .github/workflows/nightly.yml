@@ -1,0 +1,119 @@
+name: Nightly Tests
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 2:30 AM IST (9 PM UTC)
+  workflow_dispatch:       # Manual trigger
+
+jobs:
+  full-e2e:
+    name: Full E2E Suite
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: oi_lend_me_test
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U test_user"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://test_user:test_password@localhost:5433/oi_lend_me_test?schema=public
+      NEXTAUTH_SECRET: ci-test-secret-do-not-use-in-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npx prisma migrate deploy
+      - run: npm run seed:test
+      - run: npx playwright install --with-deps chromium
+      - name: Run Full E2E Suite
+        run: npx playwright test
+      - name: Upload E2E Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nightly-playwright-report
+          path: playwright-report/
+
+  load-smoke:
+    name: Load Test Smoke (100 VUs)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: oi_lend_me_test
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U test_user"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://test_user:test_password@localhost:5433/oi_lend_me_test?schema=public
+      NEXTAUTH_SECRET: ci-test-secret-do-not-use-in-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npx prisma migrate deploy
+      - run: npm run seed:test
+      - name: Install k6
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D68
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+      - name: Start App
+        run: |
+          npm run build
+          npm run start &
+          sleep 10
+      - name: Run Load Smoke Test
+        run: k6 run --vus 100 --duration 2m tests/load/browsing-scenario.js
+        env:
+          BASE_URL: http://localhost:3000
+
+  security-weekly:
+    name: Weekly Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: npm audit
+        run: npm audit --production 2>&1 | tee security-audit.txt || true
+      - name: Semgrep Full Scan
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/javascript
+            p/typescript
+            p/owasp-top-ten
+      - name: Upload Security Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-report
+          path: security-audit.txt
